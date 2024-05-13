@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require 'roda'
+require_relative './app'
+
+module Cryal
+  # Base class for Credence Web Application
+  class App < Roda
+    route('auth') do |routing|
+        @login_route = '/auth/login'
+        routing.is 'login' do
+          # GET /auth/login
+          routing.get do
+            view :login
+          end
+        end
+    end
+end
+end

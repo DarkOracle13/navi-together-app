@@ -14,11 +14,11 @@ module Cryal
 
     route do |routing|
       response['Content-Type'] = 'text/html; charset=utf-8'
-    #   @current_account = session[:current_account]
+      # @current_account = session[:current_account]
 
-    #   routing.public
-    #   routing.assets
-    #   routing.multi_route
+      routing.public
+      routing.assets
+      routing.multi_route
 
       # GET /
       routing.root do
