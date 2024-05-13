@@ -11,15 +11,19 @@ gem 'slim'
 # Configuration
 gem 'figaro'
 gem 'rake'
+gem 'hirb'
+gem 'pkg-config'
 
 # Debugging
 gem 'pry'
+gem 'rerun'
 
 # Communication
 gem 'http'
 
 # Security
 gem 'rbnacl' # assumes libsodium package already installed
+gem 'base64'
 
 # Development
 group :development do
