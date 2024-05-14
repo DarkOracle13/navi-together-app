@@ -4,5 +4,6 @@ p This application allows user to create and share their travelling plans with f
 p
   i Please avoid sharing production configuration at this point.
 
-p 
-    a href='/auth/login' login to start!
+- unless current_account
+  p 
+      a href='/auth/login' login to start!

@@ -7,26 +7,32 @@ module Cryal
   # Base class for Credence Web Application
   class App < Roda
     route('auth') do |routing|
-        @login_route = '/auth/login'
-        routing.is 'login' do
-          # GET /auth/login
-          routing.get do
-            view :login
-          end
-
-          # POST /auth/login
-          routing.post do
-            account = Cryal::AuthService.authenticate(routing)
-            # if account
-            #   session[:current_account] = account.id
-            #   flash[:notice] = 'Login successful'
-            #   routing.redirect '/'
-            # else
-            #   flash.now[:error] = 'Login failed'
-            #   view :login
-            # end
-          end
+      @login_route = '/auth/login'
+      routing.is 'login' do
+        # GET /auth/login
+        routing.get do
+          view :login
         end
+
+        # POST /auth/login
+        routing.post do
+          # AuthenticateAccount.new(App.config).call
+          account = Cryal::AuthService.new(App.config).authenticate(routing)
+          session[:current_account] = account
+          flash[:notice] = "Welcome to NaviTogether #{account['username']}"
+          routing.redirect '/'
+        rescue StandardError
+          flash.now[:error] = 'Username and password did not match our records'
+          response.status = 400
+          view :login
+        end
+      end
+      routing.on 'logout' do
+        routing.get do
+          session[:current_account] = nil
+          routing.redirect @login_route
+        end
+      end
     end
-end
+  end
 end
