@@ -14,7 +14,7 @@ module Cryal
 
     route do |routing|
       response['Content-Type'] = 'text/html; charset=utf-8'
-      # @current_account = session[:current_account]
+      @current_account = session[:current_account]
 
       routing.public
       routing.assets
@@ -22,7 +22,7 @@ module Cryal
 
       # GET /
       routing.root do
-        view 'home'#, locals: { current_account: @current_account }
+        view 'home', locals: { current_account: @current_account }
       end
     end
   end

@@ -13,6 +13,19 @@ module Cryal
           routing.get do
             view :login
           end
+
+          # POST /auth/login
+          routing.post do
+            account = Cryal::AuthService.authenticate(routing)
+            # if account
+            #   session[:current_account] = account.id
+            #   flash[:notice] = 'Login successful'
+            #   routing.redirect '/'
+            # else
+            #   flash.now[:error] = 'Login failed'
+            #   view :login
+            # end
+          end
         end
     end
 end
