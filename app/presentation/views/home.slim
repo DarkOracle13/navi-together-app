@@ -6,4 +6,5 @@ hero class="d-flex align-items-center vh-100 text-white text-center"
       
       p NaviTogether is a web-based app that keeps you connected with friends and family. Share your real-time whereabouts and enjoy unique social interactions. With NaviTogether, you'll never lose track of a friend again—connect, explore, and create memorable moments together!
       
-      a href="/auth/login" class="btn btn-primary" Get Started →
+    - unless current_account
+      a href="/auth/login" class="btn btn-primary" style="width: 150px; margin: 0 auto;" Get Started →
