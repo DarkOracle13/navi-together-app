@@ -22,6 +22,7 @@ gem 'rerun'
 gem 'http'
 
 # Security
+gem 'rack-ssl-enforcer'
 gem 'rbnacl' # assumes libsodium package already installed
 gem 'base64'
 

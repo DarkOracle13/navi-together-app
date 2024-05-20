@@ -8,7 +8,6 @@ module Cryal
   class App < Roda
     route('account') do |routing|
       @account_name = @current_account['username']
-    #   puts @account_name['username']
       routing.is @account_name do
         if @current_account
             view :account_page, locals: { current_account: @current_account }
