@@ -4,9 +4,10 @@ require 'roda'
 require 'figaro'
 require 'logger'
 require 'rack/session'
+require 'rack/ssl-enforcer'
 
 module Cryal
-  # Configuration for the API
+  # Configuration for the API 
   class App < Roda
     plugin :environments
 
@@ -23,6 +24,11 @@ module Cryal
     use Rack::Session::Cookie,
         expire_after: ONE_MONTH,
         secret: config.SESSION_SECRET
+
+    # ONE_MONTH = 30 * 24 * 60 * 60
+    # @redis_url = ENV.delete('REDISCLOUD_URL')
+    # SecureMessage.setup(ENV.delete('MSG_KEY'))
+    # SecureSession.setup(@redis_url) # only used in dev to wipe session store
 
     # HTTP Request logging
     configure :development, :production do
@@ -46,5 +52,9 @@ module Cryal
         exec 'pry -r ./spec/test_load_all'
       end
     end
+
+    # configure :production do
+    #   use Rack::SslEnforcer, hsts: true
+    # end
   end
 end
