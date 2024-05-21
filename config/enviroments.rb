@@ -20,15 +20,17 @@ module Cryal
     def self.config = Figaro.env
 
     # Session configuration
-    ONE_MONTH = 30 * 24 * 60 * 60
-    use Rack::Session::Cookie,
-        expire_after: ONE_MONTH,
-        secret: config.SESSION_SECRET
-
+    # IF YOU WANT TO USE SESSIONS, UNCOMMENT THIS BLOCK
     # ONE_MONTH = 30 * 24 * 60 * 60
-    # @redis_url = ENV.delete('REDISCLOUD_URL')
-    # SecureMessage.setup(ENV.delete('MSG_KEY'))
-    # SecureSession.setup(@redis_url) # only used in dev to wipe session store
+    # use Rack::Session::Cookie,
+    #     expire_after: ONE_MONTH,
+    #     secret: config.SESSION_SECRET
+
+    # Redis configuration
+    ONE_MONTH = 30 * 24 * 60 * 60
+    @redis_url = ENV.delete('REDISCLOUD_URL')
+    SecureMessage.setup(ENV.delete('MSG_KEY'))
+    SecureSession.setup(@redis_url) # only used in dev to wipe session store
 
     # HTTP Request logging
     configure :development, :production do
@@ -53,8 +55,8 @@ module Cryal
       end
     end
 
-    # configure :production do
-    #   use Rack::SslEnforcer, hsts: true
-    # end
+    configure :production do
+      use Rack::SslEnforcer, hsts: true
+    end
   end
 end
