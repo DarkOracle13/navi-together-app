@@ -18,7 +18,8 @@ module Cryal
         # POST /auth/login
         routing.post do
           account = Cryal::AuthService.new(App.config).authenticate(routing)
-          session[:current_account] = account
+          # session[:current_account] = account
+          SecureSession.new(session).set(:current_account, account)
           flash[:notice] = "Welcome to NaviTogether #{account['username']}"
           routing.redirect '/'
         rescue StandardError
@@ -53,7 +54,8 @@ module Cryal
       end
       routing.on 'logout' do
         routing.get do
-          session[:current_account] = nil
+          # session[:current_account] = nil
+          SecureSession.new(session).delete(:current_account)
           routing.redirect @login_route
         end
       end
