@@ -34,7 +34,7 @@ module Cryal
 
         def join(routing, current_account)
             account_id = current_account['account_id']
-            response = HTTP.post("http://localhost:3000/api/v1/accounts/#{account_id}/joinroom",
+            response = HTTP.post("#{@config.API_URL}/accounts/#{account_id}/joinroom",
                                   json: {room_id: routing.params['room_id'] , room_password: routing.params['room_password'],
                                   active: true, authority: 'member'})
 
