@@ -2,6 +2,7 @@
 
 # rubocop:disable Style/HashSyntax
 require 'rake/testtask'
+require './require_app'
 
 task :print_env do
   puts "Environment: #{ENV.fetch('RACK_ENV', 'development')}"
@@ -15,6 +16,10 @@ end
 desc 'Rake all the Ruby'
 task :style do
   sh 'rubocop .'
+end
+
+task :load_lib do
+  require_app('lib')
 end
 
 # Generate new cryptographic keys
