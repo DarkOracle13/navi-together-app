@@ -5,7 +5,7 @@ ruby File.read('.ruby-version').strip
 
 # Web
 gem 'puma'
-gem "rack-session"
+gem 'rack-session'
 gem 'roda'
 gem 'slim'
 gem 'redis-rack' #, git: 'https://github.com/redis-store/redis-rack'
