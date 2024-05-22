@@ -13,7 +13,7 @@ require_relative '../require_app'
 require_app('lib')
 
 module Cryal
-  # Configuration for the API 
+  # Configuration for the API
   class App < Roda
     plugin :environments
 
