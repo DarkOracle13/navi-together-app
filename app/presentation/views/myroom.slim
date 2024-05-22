@@ -1,2 +1,13 @@
 h1 My room
-
+    table
+        thead
+        tr
+            th ID
+            th Name
+            th Capacity
+        tbody
+        - @myrooms.each do |room|
+            tr
+            td= room['id']
+            td= room['name']
+            td= room['capacity']

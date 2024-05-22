@@ -42,7 +42,10 @@ module Cryal
 
       routing.is 'myroom' do #not done
         routing.get do
-          view :myroom, locals: { current_account: @current_account }
+          room = Cryal::RoomService.new(App.config).join(routing, @current_account)
+          @myrooms = room
+          puts @myrooms
+          view :myroom, locals: { current_account: @current_account, myrooms: @myrooms }
         end
       end
     end

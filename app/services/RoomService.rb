@@ -8,6 +8,22 @@ module Cryal
             @config = config
         end
 
+        def myroom(routing, current_account)
+            account_id = current_account['account_id']
+            response = HTTP.post("#{@config.API_URL}/accounts/#{account_id}/rooms",
+                            json: {})
+            raise(RoomSystemError) unless response.code == 200
+
+            body = JSON.parse(response.body)
+            data = body['data'] if body['data']
+            room_data = data
+            puts room_data
+
+            room_data
+
+
+        end
+
         def create(routing, current_account)
             account_id = current_account['account_id']
             puts account_id
