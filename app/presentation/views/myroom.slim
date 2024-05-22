@@ -1,13 +1,19 @@
-h1 My room
-    table
-        thead
-        tr
-            th ID
-            th Name
-            th Capacity
-        tbody
-        - @myrooms.each do |room|
-            tr
-            td= room['id']
-            td= room['name']
-            td= room['capacity']
+h1 My Room
+table.table.table-hover
+  thead
+    tr
+      th scope="col" Serial
+      th scope="col" Room ID
+      th scope="col" Authority
+      th scope="col"
+  tbody
+    - @myrooms.each do |room|
+      tr
+        th scope="row"= room['id']
+        td= room['room_id']
+        td= room['authority']
+        td
+          a.btn.btn-join href="#" View
+          a.btn.btn-exit href="#" Exit
+
+

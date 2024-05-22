@@ -3,17 +3,20 @@ require 'http'
 module Cryal
     class RoomService
         class RoomSystemError < StandardError; end
-
+        class MyRoomError < StandardError; end
         def initialize(config)
             @config = config
         end
 
         def myroom(routing, current_account)
+            puts 0
             account_id = current_account['account_id']
-            response = HTTP.post("#{@config.API_URL}/accounts/#{account_id}/rooms",
+            puts 1
+            response = HTTP.get("#{@config.API_URL}/accounts/#{account_id}/rooms",
                             json: {})
-            raise(RoomSystemError) unless response.code == 200
-
+            puts 2
+            raise(MyRoomError) unless response.code == 200
+            puts 3
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
             room_data = data
