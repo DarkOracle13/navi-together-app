@@ -8,10 +8,14 @@ Please also note the Web API that it uses: https://github.com/CryptoAlphaa/cryal
 - Home Page
 - Login
 - Logout
+- Register New Account (No verif or password strength checking yet)
+- Distributed Pool
+- Encrypt and Decrypt data (App Level)
 - Flash Bar
 - Create Room (Room owner are set as an admin)
 - Join Room (Room member are set as a member)
 - View Profile
+- View My Room (List of joined and owned room with the authorization)
 
 ## Install
 
