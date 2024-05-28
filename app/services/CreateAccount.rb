@@ -11,10 +11,10 @@ module Cryal
       @config = config
     end
 
-    def call(routing)
-      message = { email: routing.params['email'],
-                  username: routing.params['username'],
-                  password: routing.params['password'] }
+    def call( email:, username:, password: )
+      message = { email: ,
+                  username: ,
+                  password: }
 
       puts message
       puts "sending message"
