@@ -17,10 +17,14 @@ module Cryal
 
         # POST /auth/login
         routing.post do
-          account = Cryal::AuthService.new(App.config).authenticate(routing)
-          session[:current_account] = account
-          SecureSession.new(session).set(:current_account, account)
-          flash[:notice] = "Welcome to NaviTogether #{account['username']}"
+          account_info = Cryal::AuthService.new(App.config).authenticate(routing)
+
+          current_account = Account.new(
+            account_info["account"],
+            account_info["auth_token"]
+          )
+          CurrentSession.new(session).current_account = current_account
+          flash[:notice] = "Welcome to NaviTogether #{current_account.username}!"
           routing.redirect '/'
         rescue StandardError
           flash.now[:error] = 'Username and password did not match our records'
@@ -31,8 +35,6 @@ module Cryal
 
       routing.on 'register' do
         routing.get(String) do |rt|
-          puts "masuk page register password"
-          puts rt
           flash.now[:notice] = 'Email Verified! Please choose a new password'
           new_account = SecureMessage.decrypt(rt)
           view :createpassword,
@@ -40,18 +42,13 @@ module Cryal
         end
 
         routing.get do
-          puts "masuk page register email"
           view :createaccount
         end
 
         routing.post do
           account_data = routing.params.transform_keys(&:to_sym)
-          # new_account = Cryal::CreateAccount.new(App.config).call(**account_data)
-          puts "masuk post register"
-          puts routing.params['email']
-          puts routing.params['username']
           Cryal::VerifyRegistration.new(App.config).call(account_data)
-          flash[:notice] = 'Please Verify You Email'
+          flash[:notice] = 'Please verify your email!'
           routing.redirect @login_route
           # do the services somthing
         rescue StandardError
@@ -65,11 +62,10 @@ module Cryal
       routing.on 'logout' do
         routing.get do
           # session[:current_account] = nil
-          SecureSession.new(session).delete(:current_account)
+          CurrentSession.new(session).delete
           routing.redirect @login_route
         end
       end
-
     end
   end
 end

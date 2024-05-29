@@ -16,15 +16,11 @@ module Cryal
                   username: ,
                   password: }
 
-      puts message
-      puts "sending message"
-
       response = HTTP.post(
         "#{@config.API_URL}/accounts/",
         json: message
       )
 
-      puts response
       raise InvalidAccount unless response.code == 201
     end
   end

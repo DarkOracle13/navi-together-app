@@ -16,11 +16,8 @@ module Cryal
       # registration_data = { email: routing.params['email'],
       #                       username: routing.params['username'] }
       registration_token = SecureMessage.encrypt(account_data)
-      puts registration_token
       account_data['verification_url'] =
         "#{@config.APP_URL}/auth/register/#{registration_token}"
-      puts account_data
-      puts "#{@config.API_URL}/auth/register"
       response = HTTP.post(
         "#{@config.API_URL}/auth/register",
         json: account_data

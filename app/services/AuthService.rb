@@ -14,7 +14,7 @@ module Cryal
 
             raise(UnauthorizedError) unless response.code == 200
             body = JSON.parse(response.body)
-            data = body['attributes']['account']
+            data = body['attributes']
             data
         end
     end
