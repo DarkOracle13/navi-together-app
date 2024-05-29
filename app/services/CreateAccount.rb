@@ -11,20 +11,16 @@ module Cryal
       @config = config
     end
 
-    def call(routing)
-      message = { email: routing.params['email'],
-                  username: routing.params['username'],
-                  password: routing.params['password'] }
-
-      puts message
-      puts "sending message"
+    def call( email:, username:, password: )
+      message = { email: ,
+                  username: ,
+                  password: }
 
       response = HTTP.post(
         "#{@config.API_URL}/accounts/",
         json: message
       )
 
-      puts response
       raise InvalidAccount unless response.code == 201
     end
   end

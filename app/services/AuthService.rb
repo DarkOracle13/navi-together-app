@@ -13,9 +13,8 @@ module Cryal
                             json: { username: routing.params['username'], password: routing.params['password']})
 
             raise(UnauthorizedError) unless response.code == 200
-
             body = JSON.parse(response.body)
-            data = JSON.parse(body['data']) if body['data']
+            data = body['attributes']
             data
         end
     end

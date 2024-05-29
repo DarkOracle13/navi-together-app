@@ -9,30 +9,20 @@ module Cryal
         end
 
         def myroom(routing, current_account)
-            puts 0
-            account_id = current_account['account_id']
-            puts 1
-            response = HTTP.get("#{@config.API_URL}/accounts/#{account_id}/rooms",
-                            json: {})
-            puts 2
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.get("#{@config.API_URL}/rooms", headers: headers)
             raise(MyRoomError) unless response.code == 200
-            puts 3
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
-            room_data = data
-            puts room_data
-
-            room_data
-
-
+            data
         end
 
         def create(routing, current_account)
-            account_id = current_account['account_id']
-            puts account_id
-            response = HTTP.post("#{@config.API_URL}/accounts/#{account_id}/createroom",
+            # /api/v1/rooms/createroom
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.post("#{@config.API_URL}/rooms/createroom",
                             json: {room_name: routing.params['room_name'], room_description: routing.params['room_description'],
-                                    room_password: routing.params['room_password']})
+                                    room_password: routing.params['room_password']}, headers: headers)
 
             raise(RoomSystemError) unless response.code == 201
 
@@ -42,23 +32,22 @@ module Cryal
 
             # because create room, must continue to join the room
             room_id = room_data['room_id']
-            response_join_room = HTTP.post("#{@config.API_URL}/accounts/#{account_id}/joinroom",
+            response_join_room = HTTP.post("#{@config.API_URL}/rooms/joinroom",
                                   json: {room_id: room_id , room_password: routing.params['room_password'],
-                                  active: true, authority: 'admin'})
+                                  active: true, authority: 'admin'}, headers: headers)
 
             raise(RoomSystemError) unless response.code == 201
-
             room_data
         end
 
         def join(routing, current_account)
-            account_id = current_account['account_id']
-            response = HTTP.post("#{@config.API_URL}/accounts/#{account_id}/joinroom",
+            # /api/v1/rooms/joinroom
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.post("#{@config.API_URL}/rooms/joinroom",
                                   json: {room_id: routing.params['room_id'] , room_password: routing.params['room_password'],
-                                  active: true, authority: 'member'})
+                                  active: true, authority: 'member'}, headers: headers)
 
             raise(RoomSystemError) unless response.code == 201
-
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
             data

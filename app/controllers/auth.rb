@@ -17,10 +17,14 @@ module Cryal
 
         # POST /auth/login
         routing.post do
-          account = Cryal::AuthService.new(App.config).authenticate(routing)
-          # session[:current_account] = account
-          SecureSession.new(session).set(:current_account, account)
-          flash[:notice] = "Welcome to NaviTogether #{account['username']}"
+          account_info = Cryal::AuthService.new(App.config).authenticate(routing)
+
+          current_account = Account.new(
+            account_info["account"],
+            account_info["auth_token"]
+          )
+          CurrentSession.new(session).current_account = current_account
+          flash[:notice] = "Welcome to NaviTogether #{current_account.username}!"
           routing.redirect '/'
         rescue StandardError
           flash.now[:error] = 'Username and password did not match our records'
@@ -29,21 +33,22 @@ module Cryal
         end
       end
 
-      routing.is 'register' do
+      routing.on 'register' do
+        routing.get(String) do |rt|
+          flash.now[:notice] = 'Email Verified! Please choose a new password'
+          new_account = SecureMessage.decrypt(rt)
+          view :createpassword,
+                locals: { new_account: , rt: }
+        end
+
         routing.get do
-          puts "masuk page register"
           view :createaccount
         end
 
         routing.post do
-          # account_data = routing.params.transform_keys(&:to_sym)
-          # new_account = Cryal::CreateAccount.new(App.config).call(**account_data)
-          puts "masuk post register"
-          puts routing.params['email']
-          puts routing.params['username']
-          puts routing.params['password']
-          Cryal::CreateAccount.new(App.config).call(routing)
-          flash[:notice] = 'Please login with your new account information'
+          account_data = routing.params.transform_keys(&:to_sym)
+          Cryal::VerifyRegistration.new(App.config).call(account_data)
+          flash[:notice] = 'Please verify your email!'
           routing.redirect @login_route
           # do the services somthing
         rescue StandardError
@@ -51,11 +56,13 @@ module Cryal
           response.status = 400
           view :createaccount
         end
+
       end
+
       routing.on 'logout' do
         routing.get do
           # session[:current_account] = nil
-          SecureSession.new(session).delete(:current_account)
+          CurrentSession.new(session).delete
           routing.redirect @login_route
         end
       end
