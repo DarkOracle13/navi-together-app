@@ -8,7 +8,9 @@ Please also note the Web API that it uses: https://github.com/CryptoAlphaa/cryal
 - Home Page
 - Login
 - Logout
-- Register New Account (No verif or password strength checking yet)
+- Register New Account (Token Based)
+- Email Verification For New Account
+- Auth Token
 - Distributed Pool
 - Encrypt and Decrypt data (App Level)
 - Flash Bar
