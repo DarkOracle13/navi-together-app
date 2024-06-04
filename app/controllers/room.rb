@@ -7,7 +7,26 @@ module Cryal
   # Base class for Credence Web Application
   class App < Roda
     route('room') do |routing|
-        routing.is 'create' do
+        routing.on 'view' do
+          routing.on String do |room_id|
+            routing.get do
+              view :createroom, locals: { current_account: @current_account }
+            end
+
+
+            routing.post do
+              # room = Cryal::RoomService.new(App.config).create(routing, @current_account)
+              # flash[:notice] = "Room Created Successfully #{room['room_name']}"
+              routing.redirect '/'
+            rescue StandardError
+              flash.now[:error] = "Something Wrong"
+              response.status = 400
+              view :myroom, locals: { current_account: @current_account}
+            end
+          end
+        end
+
+        routing.on 'create' do
           routing.get do
             view :createroom, locals: { current_account: @current_account }
           end
@@ -23,7 +42,7 @@ module Cryal
           end
         end
 
-      routing.is 'join' do # not done
+      routing.on 'join' do
         routing.get do
           view :joinroom
         end
@@ -40,7 +59,7 @@ module Cryal
         end
       end
 
-      routing.is 'myroom' do #not done
+      routing.on 'myroom' do
         routing.get do
           room = Cryal::RoomService.new(App.config).myroom(routing, @current_account)
           @myrooms = room
