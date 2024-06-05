@@ -1,0 +1,16 @@
+h1 Room :
+table.table.table-hover
+  thead
+    tr
+      th scope="col" Number
+      th scope="col" Member
+      th scope="col" Authority
+
+  tbody
+    - @myrooms.each do |room|
+      tr
+        th scope="row"= room.room_info
+        / td= room.room_id
+        / td= room.authority
+
+

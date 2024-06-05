@@ -1,0 +1,5 @@
+en:
+  errors:
+    roomname: 'Room Name can only contain alpha numeric and " " (space) '
+    roomname_valid?: 'filename has illegal characters'
+    password: 'Password must be filled'

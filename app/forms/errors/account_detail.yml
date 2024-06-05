@@ -1,0 +1,4 @@
+en:
+  errors:
+    username: can only contains alpha numeric number and "_" (Underscore Symbol)
+    email: must be a valid address

@@ -9,11 +9,11 @@ table.table.table-hover
   tbody
     - @myrooms.each do |room|
       tr
-        th scope="row"= room['id']
-        td= room['room_id']
-        td= room['authority']
+        th scope="row"= room.room_serial
+        td= room.room_id
+        td= room.authority
         td
-          a.btn.btn-join href="#" View
+          a.btn.btn-join href="/room/view/#{room.room_id}" View
           a.btn.btn-exit href="#" Exit
 
 
