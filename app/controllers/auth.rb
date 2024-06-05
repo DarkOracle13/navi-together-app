@@ -17,6 +17,13 @@ module Cryal
 
         # POST /auth/login
         routing.post do
+          formcheck = Form::LoginCredentials.new.call(routing.params)
+
+          if formcheck.failure?
+            flash[:error] = "Please Enter Username and Password"
+            routing.redirect @login_route
+          end
+
           account_info = Cryal::AuthService.new(App.config).authenticate(routing)
 
           current_account = Account.new(
@@ -46,6 +53,12 @@ module Cryal
         end
 
         routing.post do
+          formcheck = Form::Registration.new.call(routing.params)
+          if formcheck.failure?
+            flash[:error] = Form.validation_errors(formcheck)
+            routing.redirect @register_route
+          end
+
           account_data = routing.params.transform_keys(&:to_sym)
           Cryal::VerifyRegistration.new(App.config).call(account_data)
           flash[:notice] = 'Please verify your email!'
