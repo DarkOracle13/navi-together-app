@@ -1,4 +1,4 @@
-h1 My Room
+h1 Room :
 table.table.table-hover
   thead
     tr
@@ -9,11 +9,8 @@ table.table.table-hover
   tbody
     - @myrooms.each do |room|
       tr
-        th scope="row"= "nomer"
-        td= "nama"
-        td= "authoritynya"
-        td
-          a.btn.btn-join href="#" View
-          a.btn.btn-exit href="#" Exit
+        th scope="row"= room.room_info
+        / td= room.room_id
+        / td= room.authority
 
 

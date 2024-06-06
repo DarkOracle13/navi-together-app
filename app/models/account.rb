@@ -7,21 +7,21 @@ module Cryal
         @account_info = account_info
         @auth_token = auth_token
       end
-  
+
       attr_reader :account_info, :auth_token
-  
+
       def username
         @account_info ? @account_info['username'] : nil
       end
-  
+
       def email
-        @account_info ? @account_info['email'] : nil
+        @account_info ? @account_info['email'] : "no email"
       end
-  
+
       def logged_out?
         @account_info.nil?
       end
-  
+
       def logged_in?
         !logged_out?
       end
