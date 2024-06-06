@@ -16,7 +16,7 @@ module Cryal
       config.messages.load_paths << File.join(__dir__, 'errors/account_detail.yml')
 
       params do
-        required(:username).filled(format?: USERNAME_REGEX, min_size?: 1) #make it easuer to debug no long username
+        required(:username).filled(format?: USERNAME_REGEX, min_size?: 8) #make it easuer to debug no long username
         required(:email).filled(format?: EMAIL_REGEX)
       end
     end
@@ -30,8 +30,8 @@ module Cryal
       end
 
       def enough_entropy?(string)
-        # StringSecurity.entropy(string) >= 3.0
-        StringSecurity.entropy(string) >= 0.0 #make it easier to debug no complicated password
+        StringSecurity.entropy(string) >= 3.0
+        # StringSecurity.entropy(string) >= 0.0 #make it easier to debug no complicated password
         # true
       end
 

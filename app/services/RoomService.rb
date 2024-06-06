@@ -12,13 +12,13 @@ module Cryal
         def getroom(routing, current_account, room_id)
             # puts current_account.auth_token
             headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
-            response = HTTP.get("#{@config.API_URL}/global/rooms/#{room_id}", headers: )
-            puts JSON.parse(response.body)
+            response = HTTP.get("#{@config.API_URL}/rooms?room_id=#{room_id}", headers: )
+            # puts JSON.parse(response.body)
             # puts response.code
             raise(MyRoomError) unless response.code == 200
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
-            # puts data
+            puts "The data is #{data}"
             data
         end
 
