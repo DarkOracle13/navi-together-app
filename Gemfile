@@ -24,6 +24,7 @@ gem 'redis'
 
 # Communication
 gem 'http'
+gem 'geocoder'
 
 # Security
 gem 'dry-validation'
