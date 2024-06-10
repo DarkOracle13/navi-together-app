@@ -4,18 +4,34 @@ module Cryal
     class RoomService
         class RoomSystemError < StandardError; end
         class MyRoomError < StandardError; end
+        class GetRoom < StandardError; end
         def initialize(config)
             @config = config
         end
 
-        def myroom(routing, current_account)
-            puts current_account.auth_token
+        def getroom(routing, current_account, room_id)
+            # puts current_account.auth_token
             headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
-            response = HTTP.get("#{@config.API_URL}/rooms", headers: headers)
-            puts JSON.parse(response.body)
+            response = HTTP.get("#{@config.API_URL}/rooms?room_id=#{room_id}", headers: )
+            # puts JSON.parse(response.body)
+            # puts response.code
             raise(MyRoomError) unless response.code == 200
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
+            puts "The data is #{data}"
+            data
+        end
+
+        def myroom(routing, current_account)
+            # puts current_account.auth_token
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.get("#{@config.API_URL}/rooms", headers: )
+            # puts JSON.parse(response.body)
+            # puts response.code
+            raise(MyRoomError) unless response.code == 200
+            body = JSON.parse(response.body)
+            data = body['data'] if body['data']
+            # puts data
             data
         end
 

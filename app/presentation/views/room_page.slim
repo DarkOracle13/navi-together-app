@@ -1,19 +1,32 @@
-h1 My Room
+h2 Room Information
+table.table.table-hover
+  tbody
+    tr
+      th scope="row" Room ID
+      td= @myrooms.room_id
+    tr
+      th scope="row" Room Name
+      td= @myrooms.room_name
+    tr
+      th scope="row" Room Description
+      td= @myrooms.room_description
+    tr
+      th scope="row" Created At
+      td= @myrooms.created_at
+    tr
+      th scope="row" Updated At
+      td= @myrooms.updated_at
+
+
 table.table.table-hover
   thead
     tr
       th scope="col" Number
       th scope="col" Member
-      th scope="col" Authority
 
   tbody
-    - @myrooms.each do |room|
+    - @mymember.each_with_index do |member, idx|
       tr
-        th scope="row"= "nomer"
-        td= "nama"
-        td= "authoritynya"
-        td
-          a.btn.btn-join href="#" View
-          a.btn.btn-exit href="#" Exit
-
-
+        th scope="row"= idx + 1
+        td= member.username
+        

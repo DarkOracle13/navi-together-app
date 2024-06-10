@@ -20,11 +20,14 @@ gem 'pkg-config'
 # Debugging
 gem 'pry'
 gem 'rerun'
+gem 'redis'
 
 # Communication
 gem 'http'
+gem 'geocoder'
 
 # Security
+gem 'dry-validation'
 gem 'rack-ssl-enforcer'
 gem 'rbnacl' # assumes libsodium package already installed
 gem 'base64'

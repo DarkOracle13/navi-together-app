@@ -17,6 +17,13 @@ module Cryal
 
         # POST /auth/login
         routing.post do
+          formcheck = Form::LoginCredentials.new.call(routing.params)
+
+          if formcheck.failure?
+            flash[:error] = "Please Enter Username and Password"
+            routing.redirect @login_route
+          end
+
           account_info = Cryal::AuthService.new(App.config).authenticate(routing)
 
           current_account = Account.new(
@@ -41,29 +48,38 @@ module Cryal
                 locals: { new_account: , rt: }
         end
 
-        routing.get do
-          view :createaccount
-        end
+        routing.is do
+          routing.get do
+            view :createaccount
+          end
 
-        routing.post do
-          account_data = routing.params.transform_keys(&:to_sym)
-          Cryal::VerifyRegistration.new(App.config).call(account_data)
-          flash[:notice] = 'Please verify your email!'
-          routing.redirect @login_route
-          # do the services somthing
-        rescue StandardError
-          flash.now[:error] = 'Failed to create account'
-          response.status = 400
-          view :createaccount
-        end
+          routing.post do
+            formcheck = Form::Registration.new.call(routing.params)
+            if formcheck.failure?
+              flash[:error] = Form.validation_errors(formcheck)
+              routing.redirect @register_route
+            end
 
+            account_data = routing.params.transform_keys(&:to_sym)
+            Cryal::VerifyRegistration.new(App.config).call(account_data)
+            flash[:notice] = 'Please verify your email!'
+            routing.redirect @login_route
+            # do the services somthing
+          rescue StandardError
+            flash.now[:error] = 'Failed to create account'
+            response.status = 400
+            view :createaccount
+          end
+        end
       end
 
       routing.on 'logout' do
-        routing.get do
-          # session[:current_account] = nil
-          CurrentSession.new(session).delete
-          routing.redirect @login_route
+        routing.is do
+          routing.get do
+            # session[:current_account] = nil
+            CurrentSession.new(session).delete
+            routing.redirect @login_route
+          end
         end
       end
     end

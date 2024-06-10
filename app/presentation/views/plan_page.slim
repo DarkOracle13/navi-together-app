@@ -1,0 +1,24 @@
+h2 Plan Information
+table.table.table-hover
+  tbody
+    tr
+      th scope="row" Plan ID
+      td= @myrooms.plan_id
+    tr
+      th scope="row" Plan Name
+      td= @myrooms.plan_name
+    tr
+      th scope="row" Plan Description
+      td= @myrooms.room_description
+
+table.table.table-hover
+  thead
+    tr
+      th scope="col" Number
+      th scope="col" Member
+
+  tbody
+    - @mymember.each_with_index do |member, idx|
+      tr
+        th scope="row"= idx + 1
+        td= member.username
