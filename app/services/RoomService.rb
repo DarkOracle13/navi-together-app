@@ -18,7 +18,6 @@ module Cryal
             raise(MyRoomError) unless response.code == 200
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
-            puts "The data is #{data}"
             data
         end
 

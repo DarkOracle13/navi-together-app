@@ -3,22 +3,49 @@ table.table.table-hover
   tbody
     tr
       th scope="row" Plan ID
-      td= @myrooms.plan_id
+      td= @plans['plan_id']
     tr
       th scope="row" Plan Name
-      td= @myrooms.plan_name
+      td= @plans['plan_name']
     tr
       th scope="row" Plan Description
-      td= @myrooms.room_description
+      td= @plans['plan_description']
 
+h2 Waypoints Information
 table.table.table-hover
   thead
     tr
-      th scope="col" Number
-      th scope="col" Member
+      th scope="col" Waypoint ID
+      th scope="col" Name
+      th scope="col" Address
+      th scope="col" Latitude
+      th scope="col" Longitude
 
   tbody
-    - @mymember.each_with_index do |member, idx|
+    - @waypoints.each do |waypoint|
       tr
-        th scope="row"= idx + 1
-        td= member.username
+        td= waypoint['waypoint_number']
+        td= waypoint['waypoint_name']
+        td= waypoint['waypoint_address']
+        td= waypoint['waypoint_lat']
+        td= waypoint['waypoint_long']
+        
+
+h2 User Data
+table.table.table-hover
+  thead
+    tr
+      th scope="col" Username
+      th scope="col" Current Address
+      th scope="col" Latitude
+      th scope="col" Longitude
+      th scope="col" Current Name
+
+  tbody
+    - @user_data.each do |user|
+      tr
+        td= user['username']
+        td= user['location']['cur_address']
+        td= user['location']['latitude']
+        td= user['location']['longitude']
+        td= user['location']['cur_name']

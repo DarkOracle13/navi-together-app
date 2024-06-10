@@ -12,7 +12,7 @@ module Cryal
       @updated_at = room_info["updated_at"]
     end
 
-    attr_reader :room_info, :room_id, :room_description, :created_at, :updated_at, :room_name
+    attr_reader :room_info, :room_id, :room_name, :room_description, :created_at, :updated_at
 
   end
 end

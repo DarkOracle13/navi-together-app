@@ -13,6 +13,8 @@ module Cryal
               # puts room_id
               output = Cryal::RoomService.new(App.config).getroom(routing, @current_account, room_id)
               @mymember = output["accounts"].map { |account| Cryal::Account.new(account, nil) }
+              @myplans = output["plans"].map { |plan| Cryal::Plan.new(plan, room_id) }
+              puts @myplans
               @myrooms = Cryal::Room.new(output["rooms"])
               # puts room
               view :room_page, locals: { current_account: @current_account}
@@ -57,7 +59,7 @@ module Cryal
           routing.get do
             room = Cryal::RoomService.new(App.config).myroom(routing, @current_account)
             @myrooms = room.map { |room| Cryal::UserRoom.new(room) }
-
+            
             view :myroom, locals: { current_account: @current_account}
           end
         end
