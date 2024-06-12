@@ -10,8 +10,8 @@ module Cryal
       @account_name = @current_account.username
       routing.on @account_name do
         if @current_account.logged_in?
-          puts @current_account.to_json
-          view :account_page, locals: { current_account: @current_account }
+          account_info = GetAccountDetails.new(App.config).call(@current_account, @account_name)
+          view :account_page, locals: { data: account_info }
         else
           routing.redirect '/auth/login'
         end
