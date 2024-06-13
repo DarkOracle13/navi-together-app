@@ -23,10 +23,25 @@ table.table.table-hover
     tr
       th scope="col" Number
       th scope="col" Member
-
   tbody
     - @mymember.each_with_index do |member, idx|
       tr
         th scope="row"= idx + 1
         td= member.username
         
+table.table.table-hover
+  thead
+    tr
+      th scope="col" ID
+      th scope="col" Name
+      th scope="col" Description
+      th scope="col" 
+  tbody
+    - @myplans.each do |plans|
+      tr
+        th scope="row"= plans.plan_id
+        td= plans.plan_name
+        td= plans.plan_description
+        td
+          a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
+          a.btn.btn-exit href="#" Delete

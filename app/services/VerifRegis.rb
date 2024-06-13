@@ -13,8 +13,6 @@ module Cryal
     end
 
     def call(account_data)
-      # registration_data = { email: routing.params['email'],
-      #                       username: routing.params['username'] }
       registration_token = SecureMessage.encrypt(account_data)
       account_data['verification_url'] =
         "#{@config.APP_URL}/auth/register/#{registration_token}"

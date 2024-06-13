@@ -1,4 +1,4 @@
-hero class="d-flex align-items-center vh-100 text-white text-center"
+.hero class="d-flex align-items-center vh-100 text-white text-center"
   div class="container position-relative" data-aos="fade-up" data-aos-delay="100"
     div class="row justify-content-center"
      div class="col-xl-7 col-lg-9 text-center"
@@ -6,5 +6,10 @@ hero class="d-flex align-items-center vh-100 text-white text-center"
       
       p NaviTogether is a web-based app that keeps you connected with friends and family. Share your real-time whereabouts and enjoy unique social interactions. With NaviTogether, you'll never lose track of a friend again—connect, explore, and create memorable moments together!
       
-    - unless current_account
-      a href="/auth/login" class="btn btn-primary" style="width: 150px; margin: 0 auto;" Get Started →
+      - if @current_account.logged_in?
+          a href="/geolocation/locate" class="btn btn-primary" style="width: 150px; margin: 0 auto;" Get Your Location →
+      - else
+          a href="/auth/login" class="btn btn-primary" style="width: 150px; margin: 0 auto;" Get Started →
+
+  
+      / div id="map" style="height: 500px;"

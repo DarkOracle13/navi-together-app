@@ -1,0 +1,51 @@
+h2 Plan Information
+table.table.table-hover
+  tbody
+    tr
+      th scope="row" Plan ID
+      td= @plans['plan_id']
+    tr
+      th scope="row" Plan Name
+      td= @plans['plan_name']
+    tr
+      th scope="row" Plan Description
+      td= @plans['plan_description']
+
+h2 Waypoints Information
+table.table.table-hover
+  thead
+    tr
+      th scope="col" Waypoint ID
+      th scope="col" Name
+      th scope="col" Address
+      th scope="col" Latitude
+      th scope="col" Longitude
+
+  tbody
+    - @waypoints.each do |waypoint|
+      tr
+        td= waypoint['waypoint_number']
+        td= waypoint['waypoint_name']
+        td= waypoint['waypoint_address']
+        td= waypoint['waypoint_lat']
+        td= waypoint['waypoint_long']
+        
+
+h2 User Data
+table.table.table-hover
+  thead
+    tr
+      th scope="col" Username
+      th scope="col" Current Address
+      th scope="col" Latitude
+      th scope="col" Longitude
+      th scope="col" Current Name
+
+  tbody
+    - @user_data.each do |user|
+      tr
+        td= user['username']
+        td= user['location']['cur_address']
+        td= user['location']['latitude']
+        td= user['location']['longitude']
+        td= user['location']['cur_name']
