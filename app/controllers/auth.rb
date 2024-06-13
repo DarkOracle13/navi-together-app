@@ -6,13 +6,21 @@ require_relative './app'
 module Cryal
   # Base class for Credence Web Application
   class App < Roda
+    def gh_oauth_url(config)
+      url = config.GH_OAUTH_URL
+      client_id = config.GH_CLIENT_ID
+      scope = config.GH_SCOPE
+
+      "#{url}?client_id=#{client_id}&scope=#{scope}"
+    end
+    
     route('auth') do |routing|
       @login_route = '/auth/login'
       @register_route = '/auth/register'
       routing.is 'login' do
         # GET /auth/login
         routing.get do
-          view :login
+          view :login, locals: { gh_oauth_url: gh_oauth_url(App.config)}
         end
 
         # POST /auth/login
@@ -36,7 +44,7 @@ module Cryal
         rescue StandardError
           flash.now[:error] = 'Username and password did not match our records'
           response.status = 400
-          view :login
+          view :login, locals: { gh_oauth_url: gh_oauth_url(App.config)}
         end
       end
 
@@ -70,6 +78,30 @@ module Cryal
             response.status = 400
             view :createaccount
           end
+        end
+      end
+
+      # GET /auth/github_sso_callback
+      routing.on 'github_sso_callback' do
+        routing.get do
+          authorized_account = Cryal::AuthorizeGithubAccount.new(App.config).call(routing.params['code'])
+          # puts "authorized_account: #{authorized_account.inspect}"
+          current_account = Account.new(
+            authorized_account["account"],
+            authorized_account["auth_token"]
+          )
+          # puts "current_account: #{current_account.inspect}"
+          CurrentSession.new(session).current_account = current_account
+          flash[:notice] = "Welcome to NaviTogether #{current_account.username}!"
+          routing.redirect '/'
+        rescue AuthorizeGithubAccount::UnauthorizedError
+          flash[:error] = 'Could not login with Github'
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "FAILED to validate Github account: #{e.inspect}"
+          puts e.backtrace
+          flash[:error] = 'Could not login with Github'
+          routing.redirect @login_route
         end
       end
 

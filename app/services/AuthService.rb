@@ -18,4 +18,45 @@ module Cryal
             data
         end
     end
+
+    class AuthorizeGithubAccount
+        # Errors emanating from Github
+        class UnauthorizedError < StandardError
+          def message
+            'Could not login with Github'
+          end
+        end
+    
+        def initialize(config)
+          @config = config
+        end
+    
+        def call(code)
+          access_token = get_access_token_from_github(code)
+          get_sso_account_from_api(access_token)
+        end
+    
+        private
+    
+        def get_access_token_from_github(code)
+          challenge_response =
+            HTTP.headers(accept: 'application/json')
+                .post(@config.GH_TOKEN_URL,
+                      form: { client_id: @config.GH_CLIENT_ID,
+                              client_secret: @config.GH_CLIENT_SECRET,
+                              code: code })
+          raise UnauthorizedError unless challenge_response.status < 400
+    
+          JSON.parse(challenge_response)['access_token']
+        end
+    
+        def get_sso_account_from_api(access_token)
+          response = HTTP.post("#{@config.API_URL}/auth/sso",
+                      json: { access_token: access_token })
+          raise if response.code >= 400
+          body = JSON.parse(response.body)
+          data = body['data']['attributes']
+          data
+        end
+      end
 end

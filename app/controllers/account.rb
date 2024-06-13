@@ -20,9 +20,6 @@ module Cryal
       routing.post String do |rt|
         formcheck = Form::Passwords.new.call(routing.params)
         raise Form.message_values(formcheck) if formcheck.failure?
-        # raise 'Passwords do not match or empty' if
-        #   routing.params['password'].empty? ||
-        #   routing.params['password'] != routing.params['confirmpassword']
 
         new_account = SecureMessage.decrypt(rt)
         CreateAccount.new(App.config).call(

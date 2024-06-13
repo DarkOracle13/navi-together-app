@@ -10,13 +10,10 @@ module Cryal
         routing.on 'view' do
           routing.on String do |room_id| #udah ada tapi harus ubah api
             routing.get do
-              # puts room_id
               output = Cryal::RoomService.new(App.config).getroom(routing, @current_account, room_id)
               @mymember = output["accounts"].map { |account| Cryal::Account.new(account, nil) }
               @myplans = output["plans"].map { |plan| Cryal::Plan.new(plan, room_id) }
-              puts @myplans
               @myrooms = Cryal::Room.new(output["rooms"])
-              # puts room
               view :room_page, locals: { current_account: @current_account}
             end
           end

@@ -2,6 +2,7 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 module Cryal
   # Base class for Credence Web Application
