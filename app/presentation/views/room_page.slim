@@ -45,3 +45,39 @@ table.table.table-hover
         td
           a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
           a.btn.btn-exit href="#" Delete
+
+          // Add the button for creating a new plan
+button.btn.btn-primary#openModal New Plan
+
+// Modal structure
+div#myModal.modal.fade tabindex="-1" role="dialog"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        h5.modal-title New Plan
+        button.close data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      div.modal-body
+        form action="/room/view/#{@myrooms.room_id}/plan" method="post"
+          div.form-group
+            label for="planName" Plan Name
+            input.form-control#planName type="text" name="plan_name" required
+          div.form-group
+            label for="planDescription" Plan Description
+            textarea.form-control#planDescription name="plan_description" required
+          div.modal-footer
+            button.btn.btn-secondary type="button" data-dismiss="modal" Close
+            button.btn.btn-primary type="submit" Save
+
+// Include jQuery and Bootstrap scripts
+script src="https://code.jquery.com/jquery-3.6.0.min.js"
+script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+
+// JavaScript to handle modal display
+script type="text/javascript"
+  |
+    $(document).ready(function(){
+      $("#openModal").click(function(){
+        $("#myModal").modal('show');
+      });
+    });
