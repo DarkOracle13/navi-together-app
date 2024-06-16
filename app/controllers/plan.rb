@@ -11,8 +11,8 @@ module Cryal
           routing.on String do |plan_name|
               routing.get do
                   output = Cryal::PlanService.new(App.config).get_plans(routing, @current_account, plan_name, room_id)
-                  @plans = output['plan']
-                  @waypoints = output['waypoints']
+                  @plans = Cryal::Plan.new(output["plan"], room_id)
+                  @waypoints = output["waypoints"].map{|waypoint| Cryal::Waypoint.new(waypoint)}
                   @user_data = output['user_locations']
                   view :plan_page, locals: { current_account: @current_account }
               end

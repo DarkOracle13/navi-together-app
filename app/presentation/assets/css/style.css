@@ -4,6 +4,19 @@
     display:block;
   }
 
+.logo {
+  max-width:35px;
+  margin-top: -7px;
+}
+
+.login-logo {
+  max-width:600px
+}
+
+.get-button {
+  width: 150px;
+  margin: 0 auto;
+}
 /* make a class for navigation texts */
 
 .bg-image-vertical {
