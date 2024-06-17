@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         contentType: 'application/json',
         data: JSON.stringify({ latitude: latitude, longitude: longitude }),
         success: function(response) {
-          output.innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}<br>Address: ${response.address}`;
+          output.innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}`;
         },
         error: function(error) {
           output.innerHTML = `Error: ${error}`;

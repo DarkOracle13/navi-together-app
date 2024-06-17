@@ -37,6 +37,7 @@ module Cryal
     @redis_url = ENV.delete('REDISCLOUD_URL')
     SecureMessage.setup(ENV.delete('MSG_KEY'))
     SecureSession.setup(@redis_url) # only used in dev to wipe session store
+    SignedMessage.setup(config)
 
     # HTTP Request logging
     configure :development, :production do

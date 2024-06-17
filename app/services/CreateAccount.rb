@@ -12,14 +12,8 @@ module Cryal
     end
 
     def call( email:, username:, password: )
-      message = { email: ,
-                  username: ,
-                  password: }
-
-      response = HTTP.post(
-        "#{@config.API_URL}/accounts/",
-        json: message
-      )
+      account = { email: , username: , password: }
+      response = HTTP.post("#{@config.API_URL}/accounts/",json: SignedMessage.sign(account))
 
       raise InvalidAccount unless response.code == 201
     end
