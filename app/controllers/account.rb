@@ -10,8 +10,8 @@ module Cryal
       @account_name = @current_account.username
       routing.on @account_name do
         if @current_account.logged_in?
-          puts @current_account.to_json
-          view :account_page, locals: { current_account: @current_account }
+          account_info = GetAccountDetails.new(App.config).call(@current_account, @account_name)
+          view :account_page, locals: { data: account_info }
         else
           routing.redirect '/auth/login'
         end
@@ -20,9 +20,6 @@ module Cryal
       routing.post String do |rt|
         formcheck = Form::Passwords.new.call(routing.params)
         raise Form.message_values(formcheck) if formcheck.failure?
-        # raise 'Passwords do not match or empty' if
-        #   routing.params['password'].empty? ||
-        #   routing.params['password'] != routing.params['confirmpassword']
 
         new_account = SecureMessage.decrypt(rt)
         CreateAccount.new(App.config).call(

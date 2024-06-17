@@ -10,6 +10,7 @@ gem 'roda'
 gem 'slim'
 gem 'redis-rack' #, git: 'https://github.com/redis-store/redis-rack'
 gem 'redis-store' #, git: 'https://github.com/PikachuEXE/redis-store', branch: 'fix/redis-client-compatibility'
+gem 'secure_headers'
 
 # Configuration
 gem 'figaro'

@@ -3,13 +3,13 @@ table.table.table-hover
   tbody
     tr
       th scope="row" Plan ID
-      td= @plans['plan_id']
+      td= @plans.plan_id
     tr
       th scope="row" Plan Name
-      td= @plans['plan_name']
+      td= @plans.plan_name
     tr
       th scope="row" Plan Description
-      td= @plans['plan_description']
+      td= @plans.plan_description
 
 h2 Waypoints Information
 table.table.table-hover
@@ -24,11 +24,11 @@ table.table.table-hover
   tbody
     - @waypoints.each do |waypoint|
       tr
-        td= waypoint['waypoint_number']
-        td= waypoint['waypoint_name']
-        td= waypoint['waypoint_address']
-        td= waypoint['waypoint_lat']
-        td= waypoint['waypoint_long']
+        td= waypoint.waypoint_number
+        td= waypoint.waypoint_name
+        td= waypoint.waypoint_address
+        td= waypoint.waypoint_lat
+        td= waypoint.waypoint_long
         
 
 h2 User Data
