@@ -1,16 +1,20 @@
 .hero class="d-flex align-items-center vh-100 text-white text-left"
   .container.position-relative(data-aos="fade-up" data-aos-delay="100")
-   .row
-    .col-md-6.d-flex.flex-column.justify-content-center.offset-md-1
-      h1  Never Lose a Friend Again - Share, Connect, Explore!
-      
-      p NaviTogether is a web-based app that keeps you connected with friends and family. Share your real-time whereabouts and enjoy unique social interactions. With NaviTogether, you'll never lose track of a friend again—connect, explore, and create memorable moments together!
-      
-      - if @current_account.logged_in?
-          a href="/geolocation/locate" class="btn btn-primary" Get Your Location →
-      - else
-          a href="/auth/login" class="btn btn-primary" Get Started →
-    .col-md-4
-      img(src="./hero.png" alt="Hero Image" class="img-fluid")
-  
-      / div id="map" style="height: 500px;"
+    - if @current_account.logged_in?
+      .row
+        .col-md-6.d-flex.flex-column.justify-content-center.offset-md-1
+          h1 Hello, #{@current_account.username}! 
+          h1 Let's Start Your Journey 📍
+          .button-container
+            a href="/geolocation/locate" class="btn btn-primary" Get Your Location →
+        .col-md-4
+          div id="map" class="home-map"
+    - else
+      .row
+        .col-md-6.d-flex.flex-column.justify-content-center.offset-md-1
+          h1  Never Lose a Friend Again - Share, Connect, Explore!
+          p NaviTogether is a web-based app that keeps you connected with friends and family. Share your real-time whereabouts and enjoy unique social interactions. With NaviTogether, you'll never lose track of a friend again—connect, explore, and create memorable moments together.
+          .button-container
+            a href="/auth/login" class="btn btn-primary" Get Started →
+        .col-md-4
+          img(src="./hero.png" alt="Hero Image" class="img-fluid")

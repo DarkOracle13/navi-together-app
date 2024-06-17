@@ -34,8 +34,15 @@ module Cryal
                   https://maxcdn.bootstrapcdn.com
                   ].freeze
     
-    IMG_SRC = %w['self'
-                ].freeze
+    IMG_SRC = %w['self' data:
+                  https://a.tile.openstreetmap.org
+                  https://b.tile.openstreetmap.org
+                  https://c.tile.openstreetmap.org
+                  https://unpkg.com/leaflet@1.9.4/dist/images
+                  https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png
+                  https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png
+                  https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png
+                 ].freeze
 
     CNT_SRC = %w['self'
                 https://cdnjs.cloudflare.com

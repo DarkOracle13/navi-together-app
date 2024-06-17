@@ -3,16 +3,19 @@ link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-soc
 
 section.vh-100
   div.container.py-5.h-100
-    div.row.d-flex.align-items-center.justify-content-center.h-100
+    div.row.d-flex.align-items-center.justify-content-center.h-95 class="login-form"
+      div.col-md-8.col-lg-7.col-xl-4
+        h1.text-left.mb-4 class="sigin-heading" Hello 🗺️!
       div.col-md-7.col-lg-5.col-xl-5.offset-xl-1
+        h2.text-left.mb-4 class="signin-subheading" Sign-in to your account
         form method="post" action="/auth/register" id="form-register"
           // username register
-          div.form-outline.mb-3
+          div.form-outline.mb-4 
           input.form-control.form-control-lg type="text" id="username" placeholder="Username" name="username"
+          label.form-label for="username" Username
           // username email
-          div.form-outline.mb-4
+          div.form-outline.
             input.form-control.form-control-lg type="text" id="email" placeholder="Email" name="email"
+            label.form-label for="email" Email
           // submit button
-          div class="row justify-content-center"
-            button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-create-room" style="width: 150px; margin: 0 auto;" Create Account
-
+          button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-create-room" Create Account

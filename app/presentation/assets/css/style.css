@@ -4,17 +4,87 @@
   display: block;
 }
 
+/* Navbar CSS */
 .logo {
-  width: 10px;
+  width: 50px;
+  height: 50px;
 }
 
-.login-logo {
-  max-width: 600px;
+a.navbar-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1b2f39;
+}
+
+a.navbar-login {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1b2f39;
+}
+
+/* Signin CSS */
+.sigin-heading {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #548ace;
+}
+
+.signin-subheading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #548ace;
+}
+/* Login CSS */
+.login-form {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.login-heading {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #c61c6f;
+  margin-bottom: 20px;
+}
+
+.login-subheading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #c61c6f;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.forgot-password-container {
+  text-align: right;
+}
+
+a.login-forgot-password {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #c61c6f;
+  text-align: right;
+}
+
+.full-height {
+  height: 100%;
 }
 
 .get-button {
   width: 150px;
   margin: 0 auto;
+}
+
+/* Home CSS */
+.home-map {
+  height: 500px;
+}
+.button-container {
+  display: flex; 
+  justify-content: left; 
+  align-items: center; 
+  margin-top: 20px;
 }
 /* make a class for navigation texts */
 
