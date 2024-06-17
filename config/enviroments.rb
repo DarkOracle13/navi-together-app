@@ -37,6 +37,7 @@ module Cryal
     @redis_url = ENV.delete('REDISCLOUD_URL')
     SecureMessage.setup(ENV.delete('MSG_KEY'))
     SecureSession.setup(@redis_url) # only used in dev to wipe session store
+    SignedMessage.setup(config)
 
     # HTTP Request logging
     configure :development, :production do
@@ -61,10 +62,6 @@ module Cryal
       use Rack::Session::Pool,
           expire_after: ONE_MONTH
 
-      # use Rack::Session::Redis,
-      #     expire_after: ONE_MONTH,
-      #     redis_server: @redis_url
-
       # Allows binding.pry to be used in development
       require 'pry'
 
@@ -75,7 +72,7 @@ module Cryal
     end
 
     configure :production do
-      use Rack::SslEnforcer, hsts: true
+      # Implemented HSTS in app/controllers/security.rb
 
       use Rack::Session::Redis,
         expire_after: ONE_MONTH,

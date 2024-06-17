@@ -23,5 +23,19 @@ module Cryal
             data
         end
 
+        def create(routing, current_account, room_id)
+            plan_name = routing.params['plan_name']
+            plan_description = routing.params['plan_description']
+            package = { plan_name: plan_name, plan_description: plan_description }
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            post_string = "#{@config.API_URL}/rooms/#{room_id}/plans"
+        
+            # Convert the package to JSON string
+            response = HTTP.post(post_string, headers: headers, body: package.to_json)
+            puts "response body: #{response.body}"
+            
+            raise(PlanSystemError) unless response.code == 201
+            JSON.parse(response.body)
+        end
     end
 end

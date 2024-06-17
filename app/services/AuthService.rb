@@ -9,8 +9,12 @@ module Cryal
         end
 
         def authenticate(routing)
-            response = HTTP.post("#{@config.API_URL}/auth/authentication",
-                            json: { username: routing.params['username'], password: routing.params['password']})
+            credentials = { username: routing.params['username'], password: routing.params['password'] }
+
+            response = HTTP.post("#{ENV['API_URL']}/auth/authentication", json: SignedMessage.sign(credentials))
+
+            # response = HTTP.post("#{@config.API_URL}/auth/authentication",
+            #                 json: { username: routing.params['username'], password: routing.params['password']})
 
             raise(UnauthorizedError) unless response.code == 200
             body = JSON.parse(response.body)
@@ -51,8 +55,11 @@ module Cryal
         end
     
         def get_sso_account_from_api(access_token)
-          response = HTTP.post("#{@config.API_URL}/auth/sso",
-                      json: { access_token: access_token })
+          # response = HTTP.post("#{@config.API_URL}/auth/sso",
+          #             json: { access_token: access_token })
+          signed_sso_info = { access_token: access_token }.then { |sso_info| SignedMessage.sign(sso_info) }
+          response = HTTP.post("#{@config.API_URL}/auth/sso",json: signed_sso_info)
+          
           raise if response.code >= 400
           body = JSON.parse(response.body)
           data = body['data']['attributes']

@@ -45,3 +45,23 @@ table.table.table-hover
         td
           a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
           a.btn.btn-exit href="#" Delete
+
+button.btn.btn-primary#openModal New Plan
+
+// Modal structure
+div#myModal.modal.fade tabindex="-1" role="dialog"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        h5.modal-title New Plan
+      div.modal-body
+        form action="/room/view/#{@myrooms.room_id}/plan" method="post"
+          div.form-group
+            label for="planName" Plan Name
+            input.form-control#planName type="text" name="plan_name" required
+          div.form-group
+            label for="planDescription" Plan Description
+            textarea.form-control#planDescription name="plan_description" required
+          div.modal-footer
+            button.btn.btn-secondary type="button" data-dismiss="modal" Close
+            button.btn.btn-primary type="submit" Save

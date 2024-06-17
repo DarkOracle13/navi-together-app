@@ -9,6 +9,20 @@ module Cryal
     route('room') do |routing|
         routing.on 'view' do
           routing.on String do |room_id| #udah ada tapi harus ubah api
+            routing.on 'plan' do
+              routing.post do
+                plan = Cryal::PlanService.new(App.config).create(routing, @current_account, room_id)
+                puts "plan created successfully #{plan['plan_name']}"
+                flash[:notice] = "Plan Created Successfully #{plan['plan_name']}"
+                routing.redirect "/room/view/#{room_id}"
+              rescue StandardError
+                puts "failed to create plan"
+                flash.now[:error] = "Failed to Create Plan"
+                response.status = 400
+                view :room_page, locals: { current_account: @current_account }
+              end
+            end
+
             routing.get do
               output = Cryal::RoomService.new(App.config).getroom(routing, @current_account, room_id)
               @mymember = output["accounts"].map { |account| Cryal::Account.new(account, nil) }

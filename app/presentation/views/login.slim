@@ -2,28 +2,32 @@ link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/c
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.css" integrity="sha384-KMis1ci1uYEByUqyQ+ys92P9u9WtqmYQmUvEpXsB5BuMYyTHljPVNJ24Jl6ib3o8" crossorigin="anonymous"
 
 section.vh-100
-  div.container.py-5.h-100
-    div.row.d-flex.align-items-center.justify-content-center.h-100
-      div.col-md-8.col-lg-7.col-xl-6
-        img alt="NaviTogether" src="/logo.png" style="max-width:600px;"
-      div.col-md-7.col-lg-5.col-xl-5.offset-xl-1
-        form method="post" action="/auth/login" id="form-login"
-          // username input
-          div.form-outline.mb-4
-            input.form-control.form-control-lg type="text" id="username" placeholder="Username" name="username"
-            label.form-label for="username" Username
-          // password input
-          div.form-outline.mb-3
-            input.form-control.form-control-lg type="password" id="password" placeholder="Password" name="password"
-            label.form-label for="password" Password
-            a href="#!" Forgot password?
-          // submit button
-          button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-login" Sign in
-        // social login
-        div.d-flex.justify-content-center.text-center.mt-4
-          a.btn.btn-social.btn-github href=gh_oauth_url
-            i.fa.fa-github
-            | Sign in with Github
-        // register
-        p.text-center.mt-3
-          a href="/auth/register" Register
+  div.container.py-5.h-100 
+      div.row.d-flex.align-items-center.justify-content-center.h-95 class="login-form"
+        div.col-md-8.col-lg-7.col-xl-4
+          / img alt="NaviTogether" src="/logo.png" class="login-logo"
+          h1.text-left.mb-4 class="login-heading" Welcome back👋🏼!
+        div.col-md-7.col-lg-5.col-xl-5.offset-xl-1
+          h2.text-left.mb-4 class="login-subheading" Login to your account
+          form method="post" action="/auth/login" id="form-login"
+            // username input
+            div.form-outline.mb-4
+              input.form-control.form-control-lg type="text" id="username" placeholder="Username" name="username"
+              label.form-label for="username" Username
+            // password input
+            div.form-outline.
+              input.form-control.form-control-lg type="password" id="password" placeholder="Password" name="password"
+              label.form-label for="password" Password 
+            div class="forgot-password-container"
+              a href="#!" class="login-forgot-password" Forgot password?
+            // submit button
+            button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-login" Log in
+          // social login
+          div.d-flex.justify-content-center.text-center.mt-3
+            a.btn.btn-social.btn-github href=gh_oauth_url
+              i.fa.fa-github
+              | Sign in with Github
+            
+          p.text-center.mt-3 Or
+          p.text-center 
+           a href="/auth/register" class="btn btn-outline-danger"Register

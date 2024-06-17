@@ -137,6 +137,7 @@ GEM
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
+    secure_headers (6.5.0)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -151,6 +152,7 @@ GEM
     zeitwerk (2.6.15)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -177,6 +179,7 @@ DEPENDENCIES
   roda
   rubocop
   rubocop-performance
+  secure_headers
   slim
   webmock
 
