@@ -1,16 +1,15 @@
 .force-wrap {
-    word-wrap:break-word;
-    width:100%;
-    display:block;
-  }
+  word-wrap: break-word;
+  width: 100%;
+  display: block;
+}
 
 .logo {
-  max-width:35px;
-  margin-top: -7px;
+  width: 10px;
 }
 
 .login-logo {
-  max-width:600px
+  max-width: 600px;
 }
 
 .get-button {
@@ -25,12 +24,10 @@
   background-repeat: no-repeat;
   background-position: right center;
   background-size: auto 100%;
-  }
-  
-  @media (min-width: 1025px) {
-  .h-custom-2 {
-  height: 100%;
-  }
-  }
+}
 
-  #map { height: 300px; }
+@media (min-width: 1025px) {
+  .h-custom-2 {
+    height: 100%;
+  }
+}

@@ -12,22 +12,36 @@ module Cryal
     plugin :environments
     plugin :multi_route
 
-    FONT_SRC = %w[https://fonts.gstatic.com 
+    FONT_SRC = %w['self'
+                  https://fonts.gstatic.com 
                   https://cdn.jsdelivr.net
-                  https://maxcdn.bootstrapcdn.com].freeze
+                  https://maxcdn.bootstrapcdn.com
+                  ].freeze
     
-    SCRIPT_SRC = %w[https://cdn.jsdelivr.net
+    SCRIPT_SRC = %w['self'
+                    https://cdn.jsdelivr.net
                     https://unpkg.com 
-                    https://cdnjs.cloudflare.com].freeze
+                    https://cdnjs.cloudflare.com
+                    ].freeze
 
-    STYLE_SRC = %w[https://bootswatch.com
+    STYLE_SRC = %w['self'
+                  https://bootswatch.com
                   https://cdn.jsdelivr.net
                   https://cdnjs.cloudflare.com 
                   https://unpkg.com 
                   https://fonts.gstatic.com
                   https://fonts.googleapis.com 
-                  https://maxcdn.bootstrapcdn.com].freeze
+                  https://maxcdn.bootstrapcdn.com
+                  ].freeze
+    
+    IMG_SRC = %w['self'
+                ].freeze
 
+    CNT_SRC = %w['self'
+                https://cdnjs.cloudflare.com
+                ].freeze
+    
+    
     configure :production do
       use Rack::SslEnforcer, hsts: true
     end
@@ -58,11 +72,11 @@ module Cryal
             preserve_schemes: true,
             default_src: %w['self'],
             child_src: %w['self'],
-            connect_src: %w[wws:],
-            img_src: %w['self'],
+            connect_src: %w[wws:] + CNT_SRC,
+            img_src: %w['self'] + IMG_SRC,
             font_src: %w['self'] + FONT_SRC,
             script_src: %w['self'] + SCRIPT_SRC,
-            style_src: %W['self'] + STYLE_SRC,
+            style_src: %w['self'] + STYLE_SRC,
             form_action: %w['self'],
             frame_ancestors: %w['none'],
             object_src: %w['none'],
@@ -75,6 +89,7 @@ module Cryal
     route('security') do |routing|
       # POST security/report_csp_violation
       routing.post 'report_csp_violation' do
+        puts "CSP VIOLATION WOI: #{request.body.read}"
         App.logger.warn "CSP VIOLATION: #{request.body.read}"
       end
     end
