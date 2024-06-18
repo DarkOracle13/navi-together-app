@@ -19,7 +19,7 @@ module Cryal
             raise(PlanSystemError) unless response.code == 200
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
-            puts "The data is #{data}"
+            # puts "The data is #{data}"
             data
         end
 
@@ -32,10 +32,38 @@ module Cryal
         
             # Convert the package to JSON string
             response = HTTP.post(post_string, headers: headers, body: package.to_json)
-            puts "response body: #{response.body}"
+            # puts "response body: #{response.body}"
             
             raise(PlanSystemError) unless response.code == 201
             JSON.parse(response.body)
         end
+
+        def create_waypoint(request, current_account, room_id)
+            waypoint_data = JSON.parse(request.body.read)  # Read and parse JSON data from request body
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            package = { plan_id: waypoint_data['plan_id'],
+                        latitude: waypoint_data['latitude'],
+                        longitude: waypoint_data['longitude'],
+                        waypoint_address: waypoint_data['waypoint_address'],
+                        waypoint_name: waypoint_data['waypoint_name']
+                    }
+            post_string = "#{@config.API_URL}/rooms/#{room_id}/plans/#{waypoint_data['plan_id']}/waypoints"
+            response = HTTP.post(post_string, headers: headers, body: package.to_json)
+            raise(PlanSystemError) unless response.code == 201
+            JSON.parse(response.body)
+        end
+
+        def delete_waypoint(request, current_account, room_id)
+            waypoint_id = request.params['waypoint_id']
+            plan_id = request.params['plan_id']  # Ensure plan_id is properly set here
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            delete_string = "#{@config.API_URL}/rooms/#{room_id}/plans/#{plan_id}/waypoints?waypoint_id=#{waypoint_id}"
+            response = HTTP.delete(delete_string, headers: headers)
+            unless response.code == 200
+              raise PlanSystemError, "Failed to delete waypoint: #{response.body}"
+            end
+            JSON.parse(response.body)
+          end
+          
     end
 end

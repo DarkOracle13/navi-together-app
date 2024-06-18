@@ -12,7 +12,7 @@ table.table.table-hover
       td= @plans.plan_description
 
 h2 Waypoints Information
-table.table.table-hover
+table.table.table-hover.waypoints-table
   thead
     tr
       th scope="col" Waypoint ID
@@ -23,16 +23,15 @@ table.table.table-hover
 
   tbody
     - @waypoints.each do |waypoint|
-      tr
+      tr data-waypoint-id=waypoint.waypoint_id data-lat=waypoint.waypoint_lat data-lng=waypoint.waypoint_long data-name=waypoint.waypoint_name data-address=waypoint.waypoint_address
         td= waypoint.waypoint_number
         td= waypoint.waypoint_name
         td= waypoint.waypoint_address
         td= waypoint.waypoint_lat
         td= waypoint.waypoint_long
-        
 
 h2 User Data
-table.table.table-hover
+table.table.table-hover.user-data-table
   thead
     tr
       th scope="col" Username
@@ -43,9 +42,13 @@ table.table.table-hover
 
   tbody
     - @user_data.each do |user|
-      tr
+      tr data-lat=user['location']['latitude'] data-lng=user['location']['longitude'] data-name=user['location']['cur_name'] data-address=user['location']['cur_address']
         td= user['username']
         td= user['location']['cur_address']
         td= user['location']['latitude']
         td= user['location']['longitude']
         td= user['location']['cur_name']
+
+div id="map" class="home-map"
+
+body data-room-id="#{@plans.room_id}" data-plan-name="#{@plans.plan_name}" data-plan-id="#{@plans.plan_id}"

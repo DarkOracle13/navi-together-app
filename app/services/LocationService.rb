@@ -16,13 +16,11 @@ module Cryal
             # # /api/v1/locations
             latitude = request_data["latitude"]
             longitude = request_data["longitude"]
-            puts "The latitude is #{latitude} and the longitude is #{longitude}"
-            puts "Latitude data type is #{latitude.class} and longitude data type is #{longitude.class}"
-            location_code = Geocoder.search([latitude, longitude]).first
+            address = request_data["address"]
             headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
             response = HTTP.post("#{@config.API_URL}/locations",
                             json: {latitude: request_data['latitude'].to_s, longitude: request_data['longitude'].to_s,
-                                    cur_address: location_code.address, cur_name: nil}, headers: headers)
+                                    cur_address: address, cur_name: nil}, headers: headers)
 
             raise(LocationSystemError) unless response.code == 201
 
