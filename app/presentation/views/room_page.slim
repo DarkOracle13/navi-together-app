@@ -17,7 +17,6 @@ table.table.table-hover
       th scope="row" Updated At
       td= @myrooms.updated_at
 
-
 table.table.table-hover
   thead
     tr
@@ -28,27 +27,27 @@ table.table.table-hover
       tr
         th scope="row"= idx + 1
         td= member.username
-        
+
 table.table.table-hover
   thead
     tr
       th scope="col" ID
       th scope="col" Name
       th scope="col" Description
-      th scope="col" 
+      th scope="col"
   tbody
-    - @myplans.each do |plans|
+    - @myplans.each_with_index do |plans, idx|
       tr
         th scope="row"= plans.plan_id
         td= plans.plan_name
         td= plans.plan_description
         td
           a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
-          a.btn.btn-exit href="#" Delete
+          button.btn.btn-join.openModalDelete data-plan-name=plans.plan_name data-room-id=plans.room_id Delete
 
 button.btn.btn-primary#openModal New Plan
 
-// Modal structure
+// Modal structure for new plan
 div#myModal.modal.fade tabindex="-1" role="dialog"
   div.modal-dialog role="document"
     div.modal-content
@@ -65,3 +64,15 @@ div#myModal.modal.fade tabindex="-1" role="dialog"
           div.modal-footer
             button.btn.btn-secondary type="button" data-dismiss="modal" Close
             button.btn.btn-primary type="submit" Save
+
+// Modal structure for delete confirmation
+div#deleteConfirmModal.modal.fade tabindex="-1" role="dialog"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        h5.modal-title Warning
+      div.modal-body
+        p Are you sure you want to delete this plan?
+      div.modal-footer
+        button.btn.btn-secondary type="button" data-dismiss="modal" Close
+        button.btn.btn-danger#confirmDelete type="button" Confirm

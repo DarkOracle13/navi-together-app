@@ -25,6 +25,8 @@ module Cryal
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
             data
+            # all_rooms = data['all_rooms']
+            # user_rooms = data['user_rooms']
         end
 
         def create(routing, current_account)
@@ -61,6 +63,22 @@ module Cryal
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
             data
+        end
+
+        def leave(routing, current_account, room_id)
+            # /api/v1/rooms/leaveroom
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.delete("#{@config.API_URL}/rooms/exit?room_id=#{room_id}", headers: headers)
+            raise(RoomSystemError) unless response.code == 200
+            JSON.parse(response.body)
+        end
+
+        def delete(routing, current_account, room_id)
+            # /api/v1/rooms/delete
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.delete("#{@config.API_URL}/rooms/delete?room_id=#{room_id}", headers: headers)
+            raise(RoomSystemError) unless response.code == 200
+            JSON.parse(response.body)
         end
     end
 end

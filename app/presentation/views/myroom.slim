@@ -2,18 +2,41 @@ h1 My Room
 table.table.table-hover
   thead
     tr
-      th scope="col" Serial
-      th scope="col" Room ID
+      th scope="col" Room Name
       th scope="col" Authority
       th scope="col"
   tbody
     - @myrooms.each do |room|
       tr
-        th scope="row"= room.room_serial
-        td= room.room_id
+        td= room.room_data.room_name
         td= room.authority
         td
           a.btn.btn-join href="/room/view/#{room.room_id}" View
-          a.btn.btn-exit href="#" Exit
+          - if room.authority == "admin"
+            button.btn.btn-join.openModalDelete data-room-name=room.room_data.room_name data-room-id=room.room_id Delete
+          - else
+            button.btn.btn-join.openModalLeave data-room-name=room.room_data.room_name data-room-id=room.room_id Leave            
 
+// Modal structure for delete confirmation
+div#deleteConfirmModal.modal.fade tabindex="-1" role="dialog"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        h5.modal-title Warning
+      div.modal-body
+        p Are you sure you want to delete this room?
+      div.modal-footer
+        button.btn.btn-secondary type="button" data-dismiss="modal" Close
+        button.btn.btn-danger#confirmDelete type="button" Confirm
 
+// Modal structure for leave confirmation
+div#leaveConfirmModal.modal.fade tabindex="-1" role="dialog"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        h5.modal-title Warning
+      div.modal-body
+        p Are you sure you want to leave this room?
+      div.modal-footer
+        button.btn.btn-secondary type="button" data-dismiss="modal" Close
+        button.btn.btn-danger#confirmLeave type="button" Confirm

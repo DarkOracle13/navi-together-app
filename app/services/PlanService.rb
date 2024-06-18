@@ -23,6 +23,13 @@ module Cryal
             data
         end
 
+        def delete_plan(routing, current_account, room_id, plan_name)
+            headers = { 'Authorization' => "Bearer #{current_account.auth_token}", 'Content-Type' => 'application/json' }
+            response = HTTP.delete("#{@config.API_URL}/rooms/#{room_id}/plans?plan_name=#{plan_name}", headers: headers)
+            raise(PlanSystemError) unless response.code == 200
+            JSON.parse(response.body)
+        end
+
         def create(routing, current_account, room_id)
             plan_name = routing.params['plan_name']
             plan_description = routing.params['plan_description']
