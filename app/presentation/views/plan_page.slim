@@ -38,16 +38,14 @@ table.table.table-hover.user-data-table
       th scope="col" Current Address
       th scope="col" Latitude
       th scope="col" Longitude
-      th scope="col" Current Name
 
   tbody
     - @user_data.each do |user|
-      tr data-lat=user['location']['latitude'] data-lng=user['location']['longitude'] data-name=user['location']['cur_name'] data-address=user['location']['cur_address']
+      tr data-lat=user['location']['latitude'] data-lng=user['location']['longitude'] data-name=user['username'] data-address=user['location']['cur_address']
         td= user['username']
         td= user['location']['cur_address']
         td= user['location']['latitude']
         td= user['location']['longitude']
-        td= user['location']['cur_name']
 
 div id="map" class="home-map"
 
