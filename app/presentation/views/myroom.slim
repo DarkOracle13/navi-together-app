@@ -2,18 +2,17 @@ h1 My Room
 table.table.table-hover
   thead
     tr
-      th scope="col" Serial
-      th scope="col" Room ID
+      th scope="col" Room Name
       th scope="col" Authority
       th scope="col"
   tbody
     - @myrooms.each do |room|
       tr
-        th scope="row"= room.room_serial
-        td= room.room_id
+        td= room.room_data.room_name
         td= room.authority
         td
           a.btn.btn-join href="/room/view/#{room.room_id}" View
           a.btn.btn-exit href="#" Exit
-
-
+          - if room.authority == "admin"
+            form action="/room/delete?room_id=#{user_room.room_id}" method="delete"
+              button.btn.btn-delete Delete

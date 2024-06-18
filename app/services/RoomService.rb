@@ -25,6 +25,8 @@ module Cryal
             body = JSON.parse(response.body)
             data = body['data'] if body['data']
             data
+            # all_rooms = data['all_rooms']
+            # user_rooms = data['user_rooms']
         end
 
         def create(routing, current_account)
