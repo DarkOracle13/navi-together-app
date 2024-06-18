@@ -36,14 +36,14 @@ table.table.table-hover
       th scope="col" Description
       th scope="col"
   tbody
-    - @myplans.each do |plans|
+    - @myplans.each_with_index do |plans, idx|
       tr
         th scope="row"= plans.plan_id
         td= plans.plan_name
         td= plans.plan_description
         td
           a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
-          button.btn.btn-join.openModalDelete data-plan-id=plans.plan_id data-room-id=plans.room_id Delete
+          button.btn.btn-join.openModalDelete data-plan-name=plans.plan_name data-room-id=plans.room_id Delete
 
 button.btn.btn-primary#openModal New Plan
 

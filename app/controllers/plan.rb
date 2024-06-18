@@ -18,6 +18,11 @@ module Cryal
                   view :plan_page, locals: { current_account: @current_account }
               end
 
+              routing.delete do
+                  output = Cryal::PlanService.new(App.config).delete_plan(routing, @current_account, room_id, plan_name)
+                  flash[:notice] = "Plan Deleted Successfully"
+              end
+
             # POST plan/:room_id/:plan_name - Create a waypoint for this plan.
             routing.on 'waypoints' do
               routing.is do

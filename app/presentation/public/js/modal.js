@@ -1,4 +1,4 @@
-// confirmation.js
+// // confirmation.js
 
 document.addEventListener('DOMContentLoaded', function() {
   // Open modal for new plan
@@ -7,12 +7,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Variables to store delete URL and IDs
-  let deletePlanId, deleteRoomId;
+  let deletePlanName, deleteRoomId;
 
   // Open delete confirmation modal and set IDs
-  document.querySelectorAll('.openModalDelete').forEach(function(button) {
+  const deleteButtons = document.getElementsByClassName('openModalDelete');
+  Array.from(deleteButtons).forEach(function(button) {
     button.addEventListener('click', function() {
-      deletePlanId = button.getAttribute('data-plan-id');
+      console.log('delete button clicked');
+      deletePlanName = button.getAttribute('data-plan-name');
       deleteRoomId = button.getAttribute('data-room-id');
       $('#deleteConfirmModal').modal('show');
     });
@@ -20,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Handle delete confirmation
   document.getElementById('confirmDelete').addEventListener('click', function() {
-    if (deletePlanId && deleteRoomId) {
-      fetch(`/plan/${deleteRoomId}/${deletePlanId}`, {
-        method: 'POST',
+    if (deletePlanName && deleteRoomId) {
+      fetch(`/plan/${deleteRoomId}/${deletePlanName}`, {
+        method: 'DELETE',
       }).then(response => {
         if (response.ok) {
           window.location.reload();
