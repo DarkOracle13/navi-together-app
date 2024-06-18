@@ -42,10 +42,13 @@ module Cryal
                   https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png
                   https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png
                   https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png
+                  https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-blue.png
+                  https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-red.png
                  ].freeze
 
     CNT_SRC = %w['self'
                 https://cdnjs.cloudflare.com
+                https://nominatim.openstreetmap.org
                 ].freeze
     
     
