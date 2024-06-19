@@ -6,7 +6,7 @@ require_relative './app'
 module Cryal
   # Base class for Credence Web Application
   class App < Roda
-    route('account') do |routing|
+    route('account') do |routing| # rubocop:disable Metrics/BlockLength
       @account_name = @current_account.username
       routing.on @account_name do
         if @current_account.logged_in?

@@ -2,20 +2,23 @@ link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/c
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.css" integrity="sha384-KMis1ci1uYEByUqyQ+ys92P9u9WtqmYQmUvEpXsB5BuMYyTHljPVNJ24Jl6ib3o8" crossorigin="anonymous"
 
 section.vh-100
-  div.container.py-5.h-100
-    div.row.d-flex.align-items-center.justify-content-center.h-100
-      div.col-md-7.col-lg-5.col-xl-5.offset-xl-1
+  div.container.create-room-container
+    div.create-room-form
+        h1 class="create-room-heading" Create a Room👣
         form method="post" action="/room/create" id="form-login"
           // roomname input
           div.form-outline.mb-4
+            label.form-label for="room_name" Room Name
             input.form-control.form-control-lg type="text" id="room_name" placeholder="New Room Name" name="room_name"
           // password input
           div.form-outline.mb-3
+            label.form-label for="room_password" Password
             input.form-control.form-control-lg type="password" id="room_password" placeholder="Password" name="room_password"
           // room desc input
           div.form-outline.mb-3
+            label.form-label for="room_description" Description
             input.form-control.form-control-lg type="text" id="room_description" placeholder="Description" name="room_description"
           // submit button
           div class="row justify-content-center"
-            button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-create-room" style="width: 150px; margin: 0 auto;" Create Room
+            button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-create-room" Create Room →
 

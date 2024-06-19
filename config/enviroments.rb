@@ -6,7 +6,6 @@ require 'figaro'
 require 'logger'
 require 'rack/session'
 require 'rack/ssl-enforcer'
-require 'rack/session'
 require 'rack/session/redis'
 require_relative '../require_app'
 
@@ -75,8 +74,8 @@ module Cryal
       # Implemented HSTS in app/controllers/security.rb
 
       use Rack::Session::Redis,
-        expire_after: ONE_MONTH,
-        redis_server: @redis_url
+          expire_after: ONE_MONTH,
+          redis_server: @redis_url
     end
   end
 end

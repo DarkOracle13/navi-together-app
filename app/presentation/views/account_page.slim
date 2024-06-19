@@ -1,25 +1,28 @@
-h1 Account Details
-.container
-  .row
-    h3 Attributes
-  .row
-    .col-sm-2 Username:
-    .col-sm-10
-      == data.username
-  .row
-    .col-sm-2 Email:
-    .col-sm-10
-      == data.email
-  .row.top-buffer
-    h3 API Access:
-  .row
-    span
-      = "(read-only key valid for one month)"
-  .row
-    .col-sm-2 API Key:
-    .col-sm-10
-      dd class="blockquote"
-        a data-bs-toggle="collapse" href="#api_key" aria-expanded="false" aria-controls="api_key" show key
-        div id="api_key" class="collapse"
-          dov class="card card-body"
-            pre class="text-wrap" #{data.auth_token}
+section.vh-100
+   div.container.py-5.h-100 
+    div.account-form
+      h1 class="text-primary account-heading"Account Details
+      .container
+        .row
+          h3 class="account-subheading" Attributes
+        .row
+          .col-sm-2 Username:
+          .col-sm-10
+            == data.username
+        .row
+          .col-sm-2 Email:
+          .col-sm-10
+            == data.email
+        .row.top-buffer
+          h3 class="account-subheading" API Access:
+        .row
+          span
+            = "(read-only key valid for one month)"
+        .row
+          .col-sm-2 API Key:
+          .col-sm-10
+            dd class="blockquote"
+              a data-bs-toggle="collapse" href="#api_key" aria-expanded="false" aria-controls="api_key" show key
+              div id="api_key" class="collapse"
+                dov class="card card-body"
+                  pre class="text-wrap" #{data.auth_token}

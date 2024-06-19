@@ -5,10 +5,9 @@ require 'dry-validation'
 module Cryal
   # Form helpers
   module Form
-    USERNAME_REGEX = /^[a-zA-Z0-9_]+$/.freeze
-    EMAIL_REGEX = /@/.freeze
-    ROOMNAME_REGEX = /^[a-zA-Z0-9 ]+$/.freeze
-
+    USERNAME_REGEX = /^[a-zA-Z0-9_]+$/
+    EMAIL_REGEX = /@/
+    ROOMNAME_REGEX = /^[a-zA-Z0-9 ]+$/
 
     def self.validation_errors(validation)
       validation.errors.to_h.map { |k, v| [k, v].join(' ') }.join('; ')

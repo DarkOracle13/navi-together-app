@@ -4,6 +4,7 @@ require_relative 'form_base'
 
 module Cryal
   module Form
+    # New Room Form
     class NewRoom < Dry::Validation::Contract
       config.messages.load_paths << File.join(__dir__, 'errors/new_room.yml')
 

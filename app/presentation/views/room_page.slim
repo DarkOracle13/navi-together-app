@@ -1,78 +1,81 @@
-h2 Room Information
-table.table.table-hover
-  tbody
-    tr
-      th scope="row" Room ID
-      td= @myrooms.room_id
-    tr
-      th scope="row" Room Name
-      td= @myrooms.room_name
-    tr
-      th scope="row" Room Description
-      td= @myrooms.room_description
-    tr
-      th scope="row" Created At
-      td= @myrooms.created_at
-    tr
-      th scope="row" Updated At
-      td= @myrooms.updated_at
+section.vh-100
+   div.container.py-3.h-100 
+    div.room-page-form
+      h2 class="text-primary room-page-heading" Room Information ℹ️
+      table.table.table-hover
+        tbody
+          tr 
+            th scope="row" Room ID
+            td= @myrooms.room_id
+          tr
+            th scope="row" Room Name
+            td= @myrooms.room_name
+          tr
+            th scope="row" Room Description
+            td= @myrooms.room_description
+          tr
+            th scope="row" Created At
+            td= @myrooms.created_at
+          tr
+            th scope="row" Updated At
+            td= @myrooms.updated_at
 
-table.table.table-hover
-  thead
-    tr
-      th scope="col" Number
-      th scope="col" Member
-  tbody
-    - @mymember.each_with_index do |member, idx|
-      tr
-        th scope="row"= idx + 1
-        td= member.username
+      table.table.table-hover
+        thead
+          tr class="table-primary"
+            th scope="col" Number
+            th scope="col" Member
+        tbody
+          - @mymember.each_with_index do |member, idx|
+            tr
+              th scope="row"= idx + 1
+              td= member.username
 
-table.table.table-hover
-  thead
-    tr
-      th scope="col" ID
-      th scope="col" Name
-      th scope="col" Description
-      th scope="col"
-  tbody
-    - @myplans.each_with_index do |plans, idx|
-      tr
-        th scope="row"= plans.plan_id
-        td= plans.plan_name
-        td= plans.plan_description
-        td
-          a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
-          button.btn.btn-join.openModalDelete data-plan-name=plans.plan_name data-room-id=plans.room_id Delete
+      table.table.table-hover
+        thead
+          tr class="table-primary"
+            th scope="col" ID
+            th scope="col" Name
+            th scope="col" Description
+            th scope="col"
+        tbody
+          - @myplans.each_with_index do |plans, idx|
+            tr
+              th scope="row"= plans.plan_id
+              td= plans.plan_name
+              td= plans.plan_description
+              td
+                a.btn.btn-join href="/plan/#{plans.room_id}/#{plans.plan_name}" View
+                button.btn.btn-join.openModalDelete data-plan-name=plans.plan_name data-room-id=plans.room_id Delete
 
-button.btn.btn-primary#openModal New Plan
+      button.btn.btn-warning.btn-lg.button-roompage#openModal Create a New Plan
 
-// Modal structure for new plan
-div#myModal.modal.fade tabindex="-1" role="dialog"
-  div.modal-dialog role="document"
-    div.modal-content
-      div.modal-header
-        h5.modal-title New Plan
-      div.modal-body
-        form action="/room/view/#{@myrooms.room_id}/plan" method="post"
-          div.form-group
-            label for="planName" Plan Name
-            input.form-control#planName type="text" name="plan_name" required
-          div.form-group
-            label for="planDescription" Plan Description
-            textarea.form-control#planDescription name="plan_description" required
-          div.modal-footer
-            button.btn.btn-secondary type="button" data-dismiss="modal" Close
-            button.btn.btn-primary type="submit" Save
+      // Modal structure for new plan
+      div#myModal.modal.fade tabindex="-1" role="dialog"
+        div.modal-dialog role="document"
+          div.modal-content
+            div.modal-header
+              h5.modal-title New Plan
+            div.modal-body
+              form action="/room/view/#{@myrooms.room_id}/plan" method="post"
+                div.form-group
+                  label for="planName" Plan Name
+                  input.form-control#planName type="text" name="plan_name" required
+                div.form-group
+                  label for="planDescription" Plan Description
+                  textarea.form-control#planDescription name="plan_description" required
+                div.modal-footer
+                  button.btn.btn-secondary type="button" data-dismiss="modal" Close
+                  button.btn.btn-primary type="submit" Save
 
-// Modal structure for delete confirmation
-div#deleteConfirmModal.modal.fade tabindex="-1" role="dialog"
-  div.modal-dialog role="document"
-    div.modal-content
-      div.modal-header
-        h5.modal-title Warning
-      div.modal-body
-        p Are you sure you want to delete this plan?
-      div.modal-footer
-        button.btn.btn-secondary type="button" data-dismiss="modal" Close
-        button.btn.btn-danger#confirmDelete type="button" Confirm
+      // Modal structure for delete confirmation
+      div#deleteConfirmModal.modal.fade tabindex="-1" role="dialog"
+        div.modal-dialog role="document"
+          div.modal-content
+            div.modal-header
+              h5.modal-title Warning
+            div.modal-body
+              p Are you sure you want to delete this plan?
+            div.modal-footer
+              button.btn.btn-secondary type="button" data-dismiss="modal" Close
+              button.btn.btn-danger#confirmDelete type="button" Confirm

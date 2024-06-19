@@ -13,14 +13,14 @@ module Cryal
 
       "#{url}?client_id=#{client_id}&scope=#{scope}"
     end
-    
-    route('auth') do |routing|
+
+    route('auth') do |routing| # rubocop:disable Metrics/BlockLength
       @login_route = '/auth/login'
       @register_route = '/auth/register'
       routing.is 'login' do
         # GET /auth/login
         routing.get do
-          view :login, locals: { gh_oauth_url: gh_oauth_url(App.config)}
+          view :login, locals: { gh_oauth_url: gh_oauth_url(App.config) }
         end
 
         # POST /auth/login
@@ -28,15 +28,15 @@ module Cryal
           formcheck = Form::LoginCredentials.new.call(routing.params)
 
           if formcheck.failure?
-            flash[:error] = "Please Enter Username and Password"
+            flash[:error] = 'Please Enter Username and Password'
             routing.redirect @login_route
           end
 
           account_info = Cryal::AuthService.new(App.config).authenticate(routing)
 
           current_account = Account.new(
-            account_info["account"],
-            account_info["auth_token"]
+            account_info['account'],
+            account_info['auth_token']
           )
           CurrentSession.new(session).current_account = current_account
           flash[:notice] = "Welcome to NaviTogether #{current_account.username}!"
@@ -44,16 +44,16 @@ module Cryal
         rescue StandardError
           flash.now[:error] = 'Username and password did not match our records'
           response.status = 400
-          view :login, locals: { gh_oauth_url: gh_oauth_url(App.config)}
+          view :login, locals: { gh_oauth_url: gh_oauth_url(App.config) }
         end
       end
 
-      routing.on 'register' do
+      routing.on 'register' do # rubocop:disable Metrics/BlockLength
         routing.get(String) do |rt|
           flash.now[:notice] = 'Email Verified! Please choose a new password'
           new_account = SecureMessage.decrypt(rt)
           view :createpassword,
-                locals: { new_account: , rt: }
+               locals: { new_account:, rt: }
         end
 
         routing.is do
@@ -87,8 +87,8 @@ module Cryal
           authorized_account = Cryal::AuthorizeGithubAccount.new(App.config).call(routing.params['code'])
           # puts "authorized_account: #{authorized_account.inspect}"
           current_account = Account.new(
-            authorized_account["account"],
-            authorized_account["auth_token"]
+            authorized_account['account'],
+            authorized_account['auth_token']
           )
           # puts "current_account: #{current_account.inspect}"
           CurrentSession.new(session).current_account = current_account
