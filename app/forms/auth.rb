@@ -4,6 +4,7 @@ require_relative 'form_base'
 
 module Cryal
   module Form
+    # Auth Form Login Credentials
     class LoginCredentials < Dry::Validation::Contract
       puts params
       params do
@@ -12,15 +13,17 @@ module Cryal
       end
     end
 
+    # Auth Form Registration
     class Registration < Dry::Validation::Contract
       config.messages.load_paths << File.join(__dir__, 'errors/account_detail.yml')
 
       params do
-        required(:username).filled(format?: USERNAME_REGEX, min_size?: 8) #make it easuer to debug no long username
+        required(:username).filled(format?: USERNAME_REGEX, min_size?: 8) # make it easuer to debug no long username
         required(:email).filled(format?: EMAIL_REGEX)
       end
     end
 
+    # Auth Form Passwords
     class Passwords < Dry::Validation::Contract
       config.messages.load_paths << File.join(__dir__, 'errors/password.yml')
 
@@ -36,15 +39,11 @@ module Cryal
       end
 
       rule(:password) do
-        unless enough_entropy?(value)
-          key.failure('Password must be more complex')
-        end
+        key.failure('Password must be more complex') unless enough_entropy?(value)
       end
 
       rule(:password, :confirmpassword) do
-        unless values[:password].eql?(values[:confirmpassword])
-          key.failure('Passwords do not match')
-        end
+        key.failure('Passwords do not match') unless values[:password].eql?(values[:confirmpassword])
       end
     end
   end

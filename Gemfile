@@ -6,32 +6,31 @@ ruby File.read('.ruby-version').strip
 # Web
 gem 'puma'
 gem 'rack-session'
+gem 'redis-rack' # , git: 'https://github.com/redis-store/redis-rack'
+gem 'redis-store' # , git: 'https://github.com/PikachuEXE/redis-store', branch: 'fix/redis-client-compatibility'
 gem 'roda'
-gem 'slim'
-gem 'redis-rack' #, git: 'https://github.com/redis-store/redis-rack'
-gem 'redis-store' #, git: 'https://github.com/PikachuEXE/redis-store', branch: 'fix/redis-client-compatibility'
 gem 'secure_headers'
+gem 'slim'
 
 # Configuration
 gem 'figaro'
-gem 'rake'
 gem 'hirb'
 gem 'pkg-config'
+gem 'rake'
 
 # Debugging
 gem 'pry'
-gem 'rerun'
 gem 'redis'
 
 # Communication
-gem 'http'
 gem 'geocoder'
+gem 'http'
 
 # Security
+gem 'base64'
 gem 'dry-validation'
 gem 'rack-ssl-enforcer'
 gem 'rbnacl' # assumes libsodium package already installed
-gem 'base64'
 
 # Testing
 group :test do

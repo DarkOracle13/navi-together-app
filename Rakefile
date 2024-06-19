@@ -46,7 +46,7 @@ end
 
 namespace :session do
   desc 'Wipe all sessions stored in Redis'
-  task :wipe => :load_lib do
+  task wipe: :load_lib do
     require 'redis'
     puts 'Deleting all sessions from Redis session store'
     wiped = SecureSession.wipe_redis_sessions

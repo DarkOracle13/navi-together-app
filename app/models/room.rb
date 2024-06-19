@@ -5,14 +5,13 @@ module Cryal
   class Room
     def initialize(room_info)
       @room_info = room_info
-      @room_id = room_info["room_id"]
-      @room_name = room_info["room_name"]
-      @room_description = room_info["room_description"]
-      @created_at = room_info["created_at"]
-      @updated_at = room_info["updated_at"]
+      @room_id = room_info['room_id']
+      @room_name = room_info['room_name']
+      @room_description = room_info['room_description']
+      @created_at = room_info['created_at']
+      @updated_at = room_info['updated_at']
     end
 
     attr_reader :room_info, :room_id, :room_name, :room_description, :created_at, :updated_at
-
   end
 end

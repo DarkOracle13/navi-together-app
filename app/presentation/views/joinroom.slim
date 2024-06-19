@@ -2,17 +2,19 @@ link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/c
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.css" integrity="sha384-KMis1ci1uYEByUqyQ+ys92P9u9WtqmYQmUvEpXsB5BuMYyTHljPVNJ24Jl6ib3o8" crossorigin="anonymous"
 
 section.vh-100
-  div.container.py-5.h-100
-    div.row.d-flex.align-items-center.justify-content-center.h-100
-      div.col-md-7.col-lg-5.col-xl-5.offset-xl-1
-        form method="post" action="/room/join" id="form-login"
-          // roomname input
-          div.form-outline.mb-4
-            input.form-control.form-control-lg type="text" id="room-id" placeholder="Room ID" name="room_id"
-          // password input
-          div.form-outline.mb-3
-            input.form-control.form-control-lg type="password" id="password" placeholder="Password" name="room_password"
-          // submit button
-          div class="row justify-content-center"
-            button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-create-room" style="width: 150px; margin: 0 auto;" Join Room
+  div.container.join-room-container
+    div.join-room-form
+      h1 class="join-room-heading" Join a Room 🚪
+      form method="post" action="/room/join" id="form-login"
+        // roomname input
+        div.form-outline.mb-4
+          label.form-label for="room-id" Room ID
+          input.form-control.form-control-lg type="text" id="room-id" placeholder="Room ID" name="room_id"
+        // password input
+        div.form-outline.mb-3
+          label.form-label for="password" Password
+          input.form-control.form-control-lg type="password" id="password" placeholder="Password" name="room_password"
+        // submit button
+        div class="row justify-content-center"
+          button.btn.btn-primary.btn-lg.btn-block type="submit" id="button-create-room" Join Room →
 

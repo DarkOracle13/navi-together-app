@@ -6,22 +6,21 @@ module Cryal
     def initialize(room_info, room_data = nil)
       @room_info = room_info
       @room_data = room_data
-      @room_serial = room_info["id"]
-      @room_id = room_info["room_id"]
-      @account_id = room_info["account_id"]
-      @active = room_info["active"]
-      @authority = room_info["authority"]
+      @room_serial = room_info['id']
+      @room_id = room_info['room_id']
+      @account_id = room_info['account_id']
+      @active = room_info['active']
+      @authority = room_info['authority']
     end
 
     attr_reader :room_info, :room_serial, :room_id, :account_id, :active, :authority, :room_data
 
     def member?
-      @authority == "member"
+      @authority == 'member'
     end
 
     def admin?
-      @authority == "admin"
+      @authority == 'admin'
     end
-
   end
 end

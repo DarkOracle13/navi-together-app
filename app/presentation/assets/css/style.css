@@ -22,21 +22,177 @@ a.navbar-login {
   color: #1b2f39;
 }
 
+/* Create Room CSS */
+.create-room-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1b2f39;
+  text-align: center;
+}
+
+.create-room-form {
+  background: #FBF5E3;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.create-room-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 0;
+}
+
+/* Account CSS */
+.account-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.account-form {
+  background: #FBF5E3;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h3.account-subheading{
+  color:#1b2f39;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Plan page CSS */
+.plan-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+.plan-form {
+  background: #FBF5E3;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+h2.plan-subheading{
+  color:#1b2f39;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Room Page CSS */
+.room-page-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.room-page-form {
+  background: #FBF5E3;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+/* My room CSS*/
+.myroom-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.myroom-form {
+  background: #FBF5E3;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.myroom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 0;
+}
+
+/* Join Room CSS */
+.join-room-heading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1b2f39;
+  text-align: center;
+}
+
+.join-room-form {
+  background: #FBF5E3;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.join-room-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 0;
+}
+
+/* Get Location CSS */
+.get-location-heading {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #1b2f39;
+}
+
+.get-location-form {
+  background: #FBF5E3;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.get-location-img {
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+}
+
+p.get-location-body{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 3rem;
+}
+
 /* Signin CSS */
 .sigin-heading {
   font-size: 5rem;
   font-weight: 700;
-  color: #548ace;
+  color: #1b2f39;
 }
 
 .signin-subheading {
   font-size: 2rem;
   font-weight: 600;
-  color: #548ace;
+  color: #1b2f39;
 }
 /* Login CSS */
 .login-form {
-  background: white;
+  background:#FBF5E3;
   padding: 30px;
   border-radius: 20px;
 }
@@ -44,14 +200,14 @@ a.navbar-login {
 .login-heading {
   font-size: 5rem;
   font-weight: 700;
-  color: #c61c6f;
+  color: #1b2f39;
   margin-bottom: 20px;
 }
 
 .login-subheading {
   font-size: 2rem;
   font-weight: 600;
-  color: #c61c6f;
+  color: #1b2f39;
   margin-bottom: 20px;
   margin-top: 20px;
 }
@@ -63,7 +219,7 @@ a.navbar-login {
 a.login-forgot-password {
   font-size: 1rem;
   font-weight: 600;
-  color: #c61c6f;
+  color: #1b2f39;
   text-align: right;
 }
 
@@ -80,10 +236,30 @@ a.login-forgot-password {
 .home-map {
   height: 500px;
 }
+
+h1.hero-heading {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #A88820;
+  text-align: left;
+}
+
+.home-img-landing {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.home-img-login{
+  width: 120%;
+  height: auto;
+  border-radius: 10px;
+}
+
 .button-container {
-  display: flex; 
-  justify-content: left; 
-  align-items: center; 
+  display: flex;
+  justify-content: left;
+  align-items: center;
   margin-top: 20px;
 }
 /* make a class for navigation texts */
