@@ -13,43 +13,44 @@ section.vh-100
           tr
             th scope="row" Plan Description
             td= @plans.plan_description
+      div.waypoints-form
+        h2 class="plan-subheading" Waypoints Information
+        div.responsive-table
+          table.table.table-hover.waypoints-table
+            thead
+              tr
+                th scope="col" Waypoint ID
+                th scope="col" Name
+                th scope="col" Address
+                th scope="col" Latitude
+                th scope="col" Longitude
 
-      h2 class="plan-subheading" Waypoints Information
-      table.table.table-hover.waypoints-table
-        thead
-          tr
-            th scope="col" Waypoint ID
-            th scope="col" Name
-            th scope="col" Address
-            th scope="col" Latitude
-            th scope="col" Longitude
+            tbody
+              - @waypoints.each do |waypoint|
+                tr data-waypoint-id=waypoint.waypoint_id data-lat=waypoint.waypoint_lat data-lng=waypoint.waypoint_long data-name=waypoint.waypoint_name data-address=waypoint.waypoint_address
+                  td= waypoint.waypoint_number
+                  td= waypoint.waypoint_name
+                  td= waypoint.waypoint_address
+                  td= waypoint.waypoint_lat
+                  td= waypoint.waypoint_long
+        div.responsive-table
+          h2 class="plan-subheading" User Data
+          table.table.table-hover.user-data-table
+            thead
+              tr
+                th scope="col" Username
+                th scope="col" Current Address
+                th scope="col" Latitude
+                th scope="col" Longitude
 
-        tbody
-          - @waypoints.each do |waypoint|
-            tr data-waypoint-id=waypoint.waypoint_id data-lat=waypoint.waypoint_lat data-lng=waypoint.waypoint_long data-name=waypoint.waypoint_name data-address=waypoint.waypoint_address
-              td= waypoint.waypoint_number
-              td= waypoint.waypoint_name
-              td= waypoint.waypoint_address
-              td= waypoint.waypoint_lat
-              td= waypoint.waypoint_long
+            tbody
+              - @user_data.each do |user|
+                tr data-lat=user['location']['latitude'] data-lng=user['location']['longitude'] data-name=user['username'] data-address=user['location']['cur_address']
+                  td= user['username']
+                  td= user['location']['cur_address']
+                  td= user['location']['latitude']
+                  td= user['location']['longitude']
 
-      h2 class="plan-subheading" User Data
-      table.table.table-hover.user-data-table
-        thead
-          tr
-            th scope="col" Username
-            th scope="col" Current Address
-            th scope="col" Latitude
-            th scope="col" Longitude
+          div id="map" class="home-map"
 
-        tbody
-          - @user_data.each do |user|
-            tr data-lat=user['location']['latitude'] data-lng=user['location']['longitude'] data-name=user['username'] data-address=user['location']['cur_address']
-              td= user['username']
-              td= user['location']['cur_address']
-              td= user['location']['latitude']
-              td= user['location']['longitude']
-
-      div id="map" class="home-map"
-
-      body data-room-id="#{@plans.room_id}" data-plan-name="#{@plans.plan_name}" data-plan-id="#{@plans.plan_id}"
+          body data-room-id="#{@plans.room_id}" data-plan-name="#{@plans.plan_name}" data-plan-id="#{@plans.plan_id}"
